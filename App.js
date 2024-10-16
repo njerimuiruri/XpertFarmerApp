@@ -17,6 +17,8 @@ import {
   SignupScreen,
   ForgotPasswordScreen,
   OnboardingScreen,
+  ResetPassword
+
 } from "./src/screens/index";
 
 export default function App() {
@@ -36,7 +38,6 @@ export default function App() {
         }
 
         setTimeout(() => {
-          // getToken();
           setIsLoading(false);
         }, 4000);
       } catch (e) {
@@ -100,6 +101,17 @@ export default function App() {
                 component={Otp}
                 options={{ headerShown: false }}
               />
+               <Stack.Screen
+                name="ResetPasswordScreen"
+                component={ResetPassword}
+                options={{ headerShown: false }}
+              />
+               <Stack.Screen
+                name="HomeScreen"
+                component={HomeScreen}
+                options={{ headerShown: false }}
+              />
+               
             </Stack.Navigator>
           </NavigationContainer>
         </ToastProvider>
