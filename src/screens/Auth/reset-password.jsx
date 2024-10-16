@@ -119,7 +119,7 @@ export default function ResetPassword({ navigation }) {
               }}
               onPress={() => {
                 setModalVisible(false);
-                navigation.navigate('LoginScreen'); 
+                navigation.navigate('SignInScreen'); 
               }}>
               <Text style={{ color: 'white', fontWeight: 'bold' }}>Login</Text>
             </Pressable>

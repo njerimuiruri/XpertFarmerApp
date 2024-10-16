@@ -25,9 +25,12 @@ export default function ForgotPassword({ navigation }) {
         Forgot Password
       </Text>
 
-      <Image
-        source={require("../../assets/svg/padlock.svg")}
-        style={{ width: 40, height: 40, marginBottom: 20 }}
+      <CustomIcon
+        library="AntDesign"
+        name="lock1"
+        size={40}
+        color="black"
+        style={{ marginBottom: 20 }}
       />
 
       <Text style={{ fontSize: 14, marginBottom: 20, textAlign: "center" }}>
