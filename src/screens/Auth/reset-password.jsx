@@ -20,6 +20,13 @@ export default function ResetPassword({ navigation }) {
         paddingHorizontal: 20,
         backgroundColor: 'white',
       }}>
+  <View style={{ position: "absolute", top: 0, left: 0 }}>
+      <Image
+          source={require("../../assets/images/top-left-decoration.png")}
+          style={{ width: 208, height: 144 }}
+        />
+       
+      </View>
 
       <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#74c474', marginBottom: 20 }}>
         Reset Password

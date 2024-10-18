@@ -14,6 +14,14 @@ export default function ForgotPassword({ navigation }) {
         backgroundColor: "white",
       }}
     >
+        <View style={{ position: "absolute", top: 0, left: 0 }}>
+      <Image
+          source={require("../../assets/images/top-left-decoration.png")}
+          style={{ width: 208, height: 144 }}
+        />
+       
+      </View>
+
       <Text
         style={{
           fontSize: 22,

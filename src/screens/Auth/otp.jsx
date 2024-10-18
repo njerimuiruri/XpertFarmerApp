@@ -14,7 +14,11 @@ export default function Otp({ navigation }) {
       }}
     >
       <View style={{ position: "absolute", top: 0, left: 0 }}>
-        <Image source={require("../../assets/svg/top-left-decoration.svg")} />
+      <Image
+          source={require("../../assets/images/top-left-decoration.png")}
+          style={{ width: 208, height: 144 }}
+        />
+       
       </View>
       <Text
         style={{
