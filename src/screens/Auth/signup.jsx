@@ -1,127 +1,135 @@
-import React from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
-import { Button, Input } from "native-base";
+import React, { useState } from "react";
+import { Image, Modal } from "react-native";
+import { 
+  View, 
+  Text, 
+  Button, 
+  Input, 
+  VStack, 
+  Pressable, 
+  Center 
+} from "native-base";
+import CustomIcon from '../../components/CustomIcon';  
 
-export default function LoginScreen({ navigation }) {
+export default function ResetPassword({ navigation }) {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleSubmit = () => {
+    if (newPassword && confirmPassword && newPassword === confirmPassword) {
+      setModalVisible(true);
+    } else {
+    }
+  };
+
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: "white",
-        justifyContent: "center",
-        alignItems: "center",
-        paddingHorizontal: 20,
-      }}
-    >
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 20, backgroundColor: 'white' }}>
       <View style={{ position: "absolute", top: 0, left: 0 }}>
-      <Image
+        <Image
           source={require("../../assets/images/top-left-decoration.png")}
           style={{ width: 208, height: 144 }}
         />
-       
       </View>
 
-      <Text
-        style={{
-          fontSize: 22,
-          fontWeight: "bold",
-          color: "#74c474",
-          marginBottom: 20,
-        }}
-      >
-        REGISTER
+      <Text fontSize="22" fontWeight="bold" marginBottom={5}>
+        Reset Password
       </Text>
 
-      <View style={{ width: "100%", marginBottom: 8 }}>
-        <Text style={{ fontSize: 12, marginBottom: 4, color: "black" }}>
-          First Name
-        </Text>
-        <Input variant="filled" bg="#e5f3e5" w="100%" p={1} borderRadius={8} />
-      </View>
+      <Image
+        source={require("../../assets/images/teenyicons_password-outline.png")}
+        style={{ width: 40, height: 40, marginBottom: 20 }}
+      />
 
-      <View style={{ width: "100%", marginBottom: 8 }}>
-        <Text style={{ fontSize: 12, marginBottom: 4, color: "black" }}>
-          Second Name
-        </Text>
-        <Input variant="filled" bg="#e5f3e5" w="100%" p={1} borderRadius={8} />
-      </View>
+      <Text fontSize="14" marginBottom={5} textAlign="center">
+        Please enter your new password
+      </Text>
 
-      <View style={{ width: "100%", marginBottom: 8 }}>
-        <Text style={{ fontSize: 12, marginBottom: 4, color: "black" }}>
-          Last Name
-        </Text>
-        <Input variant="filled" bg="#e5f3e5" w="100%" p={1} borderRadius={8} />
-      </View>
-
-      <View style={{ width: "100%", marginBottom: 8 }}>
-        <Text style={{ fontSize: 12, marginBottom: 4, color: "black" }}>
-          Phone Number
-        </Text>
+      <VStack space={4} width="100%">
         <Input
+          placeholder="New password"
           variant="filled"
-          bg="#e5f3e5"
-          w="100%"
-          p={1}
+          height={12}
+          backgroundColor="#e5f3e5"
           borderRadius={8}
-          keyboardType="phone-pad"
+          secureTextEntry={!showPassword}
+          onChangeText={setNewPassword}
+          InputRightElement={
+            <Pressable onPress={() => setShowPassword(!showPassword)}>
+              <CustomIcon
+                library="AntDesign"
+                name={showPassword ? "eye" : "eyeo"}
+                size={5}
+              />
+            </Pressable>
+          }
         />
-      </View>
-
-      <View style={{ width: "100%", marginBottom: 8 }}>
-        <Text style={{ fontSize: 12, marginBottom: 4, color: "black" }}>
-          Email
-        </Text>
         <Input
+          placeholder="Confirm new password"
           variant="filled"
-          bg="#e5f3e5"
-          w="100%"
-          p={1}
+          height={12}
+          backgroundColor="#e5f3e5"
           borderRadius={8}
-          keyboardType="email-address"
+          secureTextEntry={!showConfirmPassword}
+          onChangeText={setConfirmPassword}
+          InputRightElement={
+            <Pressable onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
+              <CustomIcon
+                library="AntDesign"
+                name={showConfirmPassword ? "eye" : "eyeo"}
+                size={5}
+              />
+            </Pressable>
+          }
         />
-      </View>
-
-      <View style={{ width: "100%", marginBottom: 8 }}>
-        <Text style={{ fontSize: 12, marginBottom: 4, color: "black" }}>
-          Password
-        </Text>
-        <Input
-          variant="filled"
-          bg="#e5f3e5"
-          w="100%"
-          p={1}
-          borderRadius={8}
-          secureTextEntry
-        />
-      </View>
+      </VStack>
 
       <Button
-        onPress={() => navigation.navigate("ForgotPasswordScreen")}
-        style={{
-          width: "100%",
-          marginTop: 20,
-          backgroundColor: "#74c474",
-          padding: 10,
-          borderRadius: 8,
-        }}
+        onPress={handleSubmit}
+        width="100%"
+        backgroundColor="#74c474" 
+        marginTop={5}
+        borderRadius={8}
       >
-        <Text style={{ color: "white", fontWeight: "bold" }}>REGISTER</Text>
+        <Text color="white" fontWeight="bold">Submit</Text>
       </Button>
 
-      <View
-        style={{
-          marginTop: 10,
-          flexDirection: "row",
-          justifyContent: "center",
-        }}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(!modalVisible)}
       >
-        <Text style={{ fontSize: 12 }}>Already have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("SignInScreen")}>
-          <Text style={{ fontSize: 12, color: "#74c474", fontWeight: "bold" }}>
-            Login
-          </Text>
-        </TouchableOpacity>
-      </View>
+        <Center flex={1} backgroundColor="rgba(0,0,0,0.5)">
+          <View style={{ width: 300, padding: 20, backgroundColor: 'white', borderRadius: 10, alignItems: 'center' }}>
+            <CustomIcon
+              library="AntDesign"
+              name="checkcircle"
+              size={40}
+              style={{ marginBottom: 20, color: "#74c474" }} 
+            />
+
+            <Text fontSize="16" textAlign="center" marginBottom={5}>
+              Your new password has been updated successfully
+            </Text>
+
+            <Pressable
+              backgroundColor="#74c474"
+              paddingY={2}
+              paddingX={10}
+              borderRadius={5}
+              onPress={() => {
+                setModalVisible(false);
+                navigation.navigate('SignInScreen'); 
+              }}
+            >
+              <Text color="white" fontWeight="bold">Login</Text>
+            </Pressable>
+          </View>
+        </Center>
+      </Modal>
     </View>
   );
 }

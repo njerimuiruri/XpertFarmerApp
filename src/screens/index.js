@@ -3,6 +3,7 @@ import SignupScreen from "./Auth/signup";
 import ForgotPasswordScreen from "./Auth/forgot-password";
 import Otp from "../screens/Auth/otp";
 import ResetPassword from "../screens/Auth/reset-password";
+import EmailOtpScreen from "../screens/Auth/Email-Otp-Screen";
 
 import HomeScreen from "./Home/home";
 import OnboardingScreen from "./Onboarding/OnboardingScreen";
@@ -15,5 +16,7 @@ export {
   Otp,
   OnboardingScreen,
   ResetPassword,
+  EmailOtpScreen,
+
   
 };

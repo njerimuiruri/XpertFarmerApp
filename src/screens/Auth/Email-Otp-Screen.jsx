@@ -9,7 +9,7 @@ import {
   Input,
 } from "native-base";
 
-export default function Otp({ navigation }) {
+export default function EmailOtpScreen({ navigation }) {
   const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
 
   const handleInputChange = (index, value) => {
@@ -45,11 +45,11 @@ export default function Otp({ navigation }) {
         color="#74c474"
         marginBottom={4}
       >
-        OTP
+        Email OTP
       </Text>
       
       <Text fontSize="14" marginBottom={4} color="black" textAlign="center">
-        Enter OTP sent to your Phone number
+        Enter the OTP sent to your Email address
       </Text>
 
       <HStack space={2} marginBottom={6}>

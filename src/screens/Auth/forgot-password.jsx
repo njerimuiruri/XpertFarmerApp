@@ -1,125 +1,148 @@
-import { View, Text, TextInput, Image } from "react-native";
-import React from "react";
-import { Button } from "native-base";
-import CustomIcon from "../../components/CustomIcon";
+import React, { useState } from "react";
+import { Image } from "react-native"; 
+import {
+  Box,
+  Text,
+  Input,
+  Button,
+  VStack,
+  Pressable,
+} from "native-base";
+import CustomIcon from "../../components/CustomIcon"; 
 
 export default function ForgotPassword({ navigation }) {
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [isPhoneSelected, setIsPhoneSelected] = useState(true); 
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        paddingHorizontal: 20,
-        backgroundColor: "white",
-      }}
+    <Box
+      flex={1}
+      justifyContent="center"
+      alignItems="center"
+      paddingX={5}
+      backgroundColor="white"
     >
-        <View style={{ position: "absolute", top: 0, left: 0 }}>
-      <Image
+      <Box position="absolute" top={0} left={0}>
+        <Image
           source={require("../../assets/images/top-left-decoration.png")}
           style={{ width: 208, height: 144 }}
         />
-       
-      </View>
+      </Box>
 
       <Text
-        style={{
-          fontSize: 22,
-          fontWeight: "bold",
-          color: "#74c474",
-          marginBottom: 20,
-        }}
+        fontSize="22"
+        fontWeight="bold"
+        color="#74c474"
+        mb={5}
       >
         Forgot Password
       </Text>
 
-      <CustomIcon
-        library="AntDesign"
-        name="lock1"
-        size={40}
-        color="black"
-        style={{ marginBottom: 20 }}
+      <Image
+        source={require("../../assets/images/teenyicons_password-outline.png")} 
+        style={{ width: 40, height: 40, marginBottom: 20 }}
       />
 
-      <Text style={{ fontSize: 14, marginBottom: 20, textAlign: "center" }}>
+      <Text fontSize="14" mb={5} textAlign="center">
         Please choose your registered email or phone number
       </Text>
 
-      <View style={{ width: "100%", marginBottom: 8 }}>
-        <Text style={{ fontSize: 12, marginBottom: 4, color: "black" }}>
-          Phone Number
-        </Text>
-        <View style={{ position: "relative" }}>
-          <CustomIcon
-            library="AntDesign"
-            name="phone"
-            size={20}
-            color="black"
-            style={{
-              position: "absolute",
-              top: 10,
-              left: 10,
-            }}
-          />
-          <TextInput
-            style={{
-              width: "100%",
-              height: 40,
-              backgroundColor: "#e5f3e5",
-              borderRadius: 8,
-              paddingLeft: 40,
-              fontSize: 14,
-            }}
+      {isPhoneSelected ? (
+        <VStack width="100%" space={2} mb={5}>
+          <Text fontSize="12" mb={1} color="black">
+            Phone Number
+          </Text>
+          <Input
+            variant="filled"
+            bg="#e5f3e5"
+            width="100%"
+            borderRadius={8}
+            p={2}
+            fontSize={14}
             keyboardType="phone-pad"
             placeholder="07xxxxxxxx"
+            value={phoneNumber}
+            onChangeText={setPhoneNumber}
+            InputLeftElement={
+              <CustomIcon
+                library="AntDesign"
+                name="phone"
+                size={20}
+                color="black"
+                style={{ marginLeft: 10 }}
+              />
+            }
           />
-        </View>
-      </View>
-
-      <Text style={{ marginVertical: 10 }}>OR</Text>
-
-      <View style={{ width: "100%", marginBottom: 20 }}>
-        <Text style={{ fontSize: 12, marginBottom: 4, color: "black" }}>
-          Email
-        </Text>
-        <View style={{ position: "relative" }}>
-          <CustomIcon
-            library="AntDesign"
-            name="mail"
-            size={20}
-            color="black"
-            style={{
-              position: "absolute",
-              top: 10,
-              left: 10,
-            }}
-          />
-          <TextInput
-            style={{
-              width: "100%",
-              height: 40,
-              backgroundColor: "#e5f3e5",
-              borderRadius: 8,
-              paddingLeft: 40,
-              fontSize: 14,
-            }}
+        </VStack>
+      ) : (
+        <VStack width="100%" space={2} mb={5}>
+          <Text fontSize="12" mb={1} color="black">
+            Email
+          </Text>
+          <Input
+            variant="filled"
+            bg="#e5f3e5"
+            width="100%"
+            borderRadius={8}
+            p={2}
+            fontSize={14}
             keyboardType="email-address"
             placeholder="support@xcapital.com"
+            value={email}
+            onChangeText={setEmail}
+            InputLeftElement={
+              <CustomIcon
+                library="AntDesign"
+                name="mail"
+                size={20}
+                color="black"
+                style={{ marginLeft: 10 }}
+              />
+            }
           />
-        </View>
-      </View>
+        </VStack>
+      )}
+
+      <Text marginVertical={2}>OR</Text>
+
+      <Box flexDirection="row" justifyContent="space-around" width="100%">
+        <Button
+          onPress={() => setIsPhoneSelected(true)}
+          variant={isPhoneSelected ? "solid" : "outline"}
+          colorScheme="green"
+          width="40%"
+        >
+          Phone
+        </Button>
+        <Button
+          onPress={() => setIsPhoneSelected(false)}
+          variant={!isPhoneSelected ? "solid" : "outline"}
+          colorScheme="green"
+          width="40%"
+        >
+          Email
+        </Button>
+      </Box>
 
       <Button
-        onPress={() => navigation.navigate("OtpSreen")}
-        style={{
-          width: "100%",
-          backgroundColor: "#74c474",
-          padding: 12,
-          borderRadius: 8,
+        onPress={() => {
+          if (isPhoneSelected) {
+            navigation.navigate("OtpSreen"); 
+          } else {
+            navigation.navigate("EmailOtpScreen"); 
+          }
         }}
+        width="100%"
+        mt={5}
+        backgroundColor="#74c474"
+        padding={3}
+        borderRadius={8}
       >
-        <Text style={{ color: "white", fontWeight: "bold" }}>Next</Text>
+        <Text color="white" fontWeight="bold">
+          Next
+        </Text>
       </Button>
-    </View>
+    </Box>
   );
 }

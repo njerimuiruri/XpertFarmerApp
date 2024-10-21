@@ -1,137 +1,144 @@
-import { View, Text, TextInput, Modal, Pressable } from "react-native";
 import React, { useState } from "react";
-import { Button } from "native-base";
+import { Image, Modal } from "react-native";
+import { 
+  View, 
+  Text, 
+  Button, 
+  Input, 
+  VStack, 
+  Pressable, 
+  Center 
+} from "native-base";
 import CustomIcon from '../../components/CustomIcon';  
 
 export default function ResetPassword({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleSubmit = () => {
-
-    setModalVisible(true);
+    if (newPassword && confirmPassword && newPassword === confirmPassword) {
+      setModalVisible(true);
+    } else {
+    }
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-        backgroundColor: 'white',
-      }}>
-  <View style={{ position: "absolute", top: 0, left: 0 }}>
-      <Image
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 20, backgroundColor: 'white' }}>
+      <View style={{ position: "absolute", top: 0, left: 0 }}>
+        <Image
           source={require("../../assets/images/top-left-decoration.png")}
           style={{ width: 208, height: 144 }}
         />
-       
       </View>
 
-      <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#74c474', marginBottom: 20 }}>
+      <Text fontSize="22" fontWeight="bold" marginBottom={5}>
         Reset Password
       </Text>
 
-      <CustomIcon
-        library="AntDesign"
-        name="lock1"
-        size={40}
-        color="black"
-        style={{ marginBottom: 20 }}
+      <Image
+        source={require("../../assets/images/teenyicons_password-outline.png")}
+        style={{ width: 40, height: 40, marginBottom: 20 }}
       />
 
-      <Text style={{ fontSize: 14, marginBottom: 20, textAlign: 'center' }}>
+      <Text fontSize="14" marginBottom={5} textAlign="center">
         Please enter your new password
       </Text>
 
-      <View style={{ width: '100%', marginBottom: 16 }}>
-        <Text style={{ fontSize: 12, marginBottom: 4, color: 'black' }}>New password</Text>
-        <TextInput
-          style={{
-            width: '100%',
-            height: 40,
-            backgroundColor: '#e5f3e5',
-            borderRadius: 8,
-            paddingLeft: 10,
-            fontSize: 14,
-          }}
-          secureTextEntry={true}
+      <VStack space={4} width="100%">
+        <Input
+          placeholder="New password"
+          variant="filled"
+          height={12}
+          backgroundColor="#e5f3e5"
+          borderRadius={8}
+          secureTextEntry={!showPassword}
+          onChangeText={setNewPassword}
+          InputRightElement={
+            <Pressable onPress={() => setShowPassword(!showPassword)}>
+              <CustomIcon
+                library="AntDesign"
+                name={showPassword ? "eye" : "eyeo"}
+                size={5}
+              />
+            </Pressable>
+          }
         />
-      </View>
-
-      <View style={{ width: '100%', marginBottom: 24 }}>
-        <Text style={{ fontSize: 12, marginBottom: 4, color: 'black' }}>Confirm new password</Text>
-        <TextInput
-          style={{
-            width: '100%',
-            height: 40,
-            backgroundColor: '#e5f3e5',
-            borderRadius: 8,
-            paddingLeft: 10,
-            fontSize: 14,
-          }}
-          secureTextEntry={true}
+        <Input
+          placeholder="Confirm new password"
+          variant="filled"
+          height={12}
+          backgroundColor="#e5f3e5"
+          borderRadius={8}
+          secureTextEntry={!showConfirmPassword}
+          onChangeText={setConfirmPassword}
+          InputRightElement={
+            <Pressable onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
+              <CustomIcon
+                library="AntDesign"
+                name={showConfirmPassword ? "eye" : "eyeo"}
+                size={5}
+              />
+            </Pressable>
+          }
         />
-      </View>
+      </VStack>
 
       <Button
         onPress={handleSubmit}
-        style={{
-          width: '100%',
-          backgroundColor: '#74c474',
-          padding: 12,
-          borderRadius: 8,
-        }}>
-        <Text style={{ color: 'white', fontWeight: 'bold' }}>Submit</Text>
+        width="100%"
+        backgroundColor="#74c474" 
+        marginTop={5}
+        borderRadius={8}
+      >
+        <Text color="white" fontWeight="bold">Submit</Text>
       </Button>
 
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}>
-        <View style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: 'rgba(0,0,0,0.5)'
-        }}>
-          <View style={{
-            width: 300,
-            padding: 20,
-            backgroundColor: 'white',
-            borderRadius: 10,
-            alignItems: 'center',
-          }}>
-            <CustomIcon
-              library="AntDesign"
-              name="checkcircle"
-              size={40}
-              color="#74c474"
-              style={{ marginBottom: 20 }}
-            />
+        onRequestClose={() => setModalVisible(!modalVisible)}
+      >
+        <Center flex={1} backgroundColor="rgba(0,0,0,0.5)">
+          <View style={{ width: 300, padding: 20, backgroundColor: 'white', borderRadius: 10, alignItems: 'center' }}>
+            <View style={{ 
+              width: 60, 
+              height: 60, 
+              borderRadius: 30, 
+              backgroundColor: "#74c474", 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              marginBottom: 20 
+            }}>
+              <CustomIcon
+                library="MaterialIcons" 
+                name="shield" 
+                size={30}
+                style={{ color: "white" }} 
+              />
+            </View>
 
-            <Text style={{ fontSize: 16, textAlign: 'center', marginBottom: 20 }}>
+            <Text fontSize="16" textAlign="center" marginBottom={5}>
               Your new password has been updated successfully
             </Text>
 
             <Pressable
-              style={{
-                backgroundColor: '#74c474',
-                paddingVertical: 10,
-                paddingHorizontal: 40,
-                borderRadius: 5,
-              }}
+              backgroundColor="#74c474"
+              paddingY={2}
+              paddingX={10}
+              borderRadius={5}
               onPress={() => {
                 setModalVisible(false);
                 navigation.navigate('SignInScreen'); 
-              }}>
-              <Text style={{ color: 'white', fontWeight: 'bold' }}>Login</Text>
+              }}
+            >
+              <Text color="white" fontWeight="bold">Login</Text>
             </Pressable>
           </View>
-        </View>
+        </Center>
       </Modal>
     </View>
   );

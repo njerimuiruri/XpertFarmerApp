@@ -18,6 +18,11 @@ import {
   ForgotPasswordScreen,
   OnboardingScreen,
   ResetPassword,
+<<<<<<< HEAD
+=======
+  EmailOtpScreen,
+
+>>>>>>> fc2ec25 (Refactor screens and add Email OTP functionality)
 } from "./src/screens/index";
 
 export default function App() {
@@ -110,6 +115,15 @@ export default function App() {
                 component={HomeScreen}
                 options={{ headerShown: false }}
               />
+<<<<<<< HEAD
+=======
+              
+              <Stack.Screen
+                name="EmailOtpScreen"
+                component={EmailOtpScreen}
+                options={{ headerShown: false }}
+              />
+>>>>>>> fc2ec25 (Refactor screens and add Email OTP functionality)
             </Stack.Navigator>
           </NavigationContainer>
         </ToastProvider>
