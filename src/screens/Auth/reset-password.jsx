@@ -33,7 +33,9 @@ export default function ResetPassword({ navigation }) {
           style={{ width: 208, height: 144 }}
         />
       </View>
-
+      <Image
+        source={require("../../assets/images/xpertLogo.jpeg")} 
+        style={{ width: 90, height: 100, marginBottom: 20 }}      />
       <Text fontSize="22" fontWeight="bold" marginBottom={5}>
         Reset Password
       </Text>

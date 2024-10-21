@@ -29,7 +29,9 @@ export default function ForgotPassword({ navigation }) {
           style={{ width: 208, height: 144 }}
         />
       </Box>
-
+      <Image
+        source={require("../../assets/images/xpertLogo.jpeg")} 
+        style={{ width: 90, height: 100, marginBottom: 20 }}      />
       <Text
         fontSize="22"
         fontWeight="bold"
