@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Image } from "react-native"; 
+import { Image } from "react-native";
 import {
   Box,
   Text,
@@ -29,7 +29,7 @@ export default function EmailOtpScreen({ navigation }) {
       flex={1}
       justifyContent="center"
       alignItems="center"
-      paddingX={5}
+      paddingX={6}
       backgroundColor="white"
     >
       <Box position="absolute" top={0} left={0}>
@@ -38,7 +38,9 @@ export default function EmailOtpScreen({ navigation }) {
           style={{ width: 208, height: 144 }}
         />
       </Box>
-
+      <Image
+        source={require("../../assets/images/xpertLogo.jpeg")}
+        style={{ width: 180, height: 180, marginBottom: 10 }} />
       <Text
         fontSize="22"
         fontWeight="bold"
@@ -47,7 +49,7 @@ export default function EmailOtpScreen({ navigation }) {
       >
         Email OTP
       </Text>
-      
+
       <Text fontSize="14" marginBottom={4} color="black" textAlign="center">
         Enter the OTP sent to your Email address
       </Text>

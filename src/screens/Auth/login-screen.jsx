@@ -1,5 +1,5 @@
 import React from "react";
-import { Image } from "react-native"; 
+import { Image } from "react-native";
 import {
   Box,
   Text,
@@ -15,7 +15,7 @@ export default function LoginScreen({ navigation }) {
       flex={1}
       justifyContent="center"
       alignItems="center"
-      paddingX={5}
+      paddingX={6}
       backgroundColor="white"
     >
       <Box position="absolute" top={0} left={0}>
@@ -26,8 +26,8 @@ export default function LoginScreen({ navigation }) {
       </Box>
 
       <Image
-        source={require("../../assets/images/xpertLogo.jpeg")} 
-        style={{ width: 90, height: 100, marginBottom: 20 }}      />
+        source={require("../../assets/images/xpertLogo.jpeg")}
+        style={{ width: 180, height: 180, marginBottom: 20 }} />
 
       <Text
         fontSize="20"
@@ -40,7 +40,7 @@ export default function LoginScreen({ navigation }) {
 
       <VStack width="100%" space={2}>
         <Box>
-          <Text fontSize="10" mb={1} color="black">
+          <Text fontSize="16" fontWeight={500} mb={1} color="black">
             Phone Number
           </Text>
           <Input
@@ -55,7 +55,7 @@ export default function LoginScreen({ navigation }) {
         </Box>
 
         <Box>
-          <Text fontSize="10" mb={1} color="black">
+          <Text fontSize="16" fontWeight={500} mb={1} color="black">
             Password
           </Text>
           <Input
@@ -73,14 +73,14 @@ export default function LoginScreen({ navigation }) {
             alignSelf="flex-end"
             mt={1}
           >
-            <Text fontSize="12" color="black">
+            <Text fontSize="13" color="black" className="underline">
               Forgot Password?
             </Text>
           </Pressable>
         </Box>
 
         <Button
-          onPress={() => {}}
+          onPress={() => { }}
           width="100%"
           mt={5}
           backgroundColor="#74c474"
@@ -93,11 +93,11 @@ export default function LoginScreen({ navigation }) {
         </Button>
 
         <Box mt={5} flexDirection="row" justifyContent="center">
-          <Text fontSize="12" color="black">
+          <Text fontSize="15" color="black">
             Do not have an account?{" "}
           </Text>
           <Pressable onPress={() => navigation.navigate("SignupScreen")}>
-            <Text fontSize="12" color="#74c474" fontWeight="bold">
+            <Text fontSize="15" color="#74c474" fontWeight="bold">
               Register
             </Text>
           </Pressable>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image } from "react-native"; 
+import { Image } from "react-native";
 import {
   Box,
   Text,
@@ -8,19 +8,19 @@ import {
   VStack,
   Pressable,
 } from "native-base";
-import CustomIcon from "../../components/CustomIcon"; 
+import CustomIcon from "../../components/CustomIcon";
 
 export default function ForgotPassword({ navigation }) {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
-  const [isPhoneSelected, setIsPhoneSelected] = useState(true); 
+  const [isPhoneSelected, setIsPhoneSelected] = useState(true);
 
   return (
     <Box
       flex={1}
       justifyContent="center"
       alignItems="center"
-      paddingX={5}
+      paddingX={6}
       backgroundColor="white"
     >
       <Box position="absolute" top={0} left={0}>
@@ -30,8 +30,8 @@ export default function ForgotPassword({ navigation }) {
         />
       </Box>
       <Image
-        source={require("../../assets/images/xpertLogo.jpeg")} 
-        style={{ width: 90, height: 100, marginBottom: 20 }}      />
+        source={require("../../assets/images/xpertLogo.jpeg")}
+        style={{ width: 180, height: 180, marginBottom: 10 }} />
       <Text
         fontSize="22"
         fontWeight="bold"
@@ -42,7 +42,7 @@ export default function ForgotPassword({ navigation }) {
       </Text>
 
       <Image
-        source={require("../../assets/images/teenyicons_password-outline.png")} 
+        source={require("../../assets/images/teenyicons_password-outline.png")}
         style={{ width: 40, height: 40, marginBottom: 20 }}
       />
 
@@ -52,7 +52,7 @@ export default function ForgotPassword({ navigation }) {
 
       {isPhoneSelected ? (
         <VStack width="100%" space={2} mb={5}>
-          <Text fontSize="12" mb={1} color="black">
+          <Text fontSize="16" className="font-semibold" mb={1} color="black">
             Phone Number
           </Text>
           <Input
@@ -79,7 +79,7 @@ export default function ForgotPassword({ navigation }) {
         </VStack>
       ) : (
         <VStack width="100%" space={2} mb={5}>
-          <Text fontSize="12" mb={1} color="black">
+          <Text fontSize="16" className="font-semibold" mb={1} color="black">
             Email
           </Text>
           <Input
@@ -130,9 +130,9 @@ export default function ForgotPassword({ navigation }) {
       <Button
         onPress={() => {
           if (isPhoneSelected) {
-            navigation.navigate("OtpSreen"); 
+            navigation.navigate("OtpSreen");
           } else {
-            navigation.navigate("EmailOtpScreen"); 
+            navigation.navigate("EmailOtpScreen");
           }
         }}
         width="100%"

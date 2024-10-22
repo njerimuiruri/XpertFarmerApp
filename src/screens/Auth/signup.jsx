@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image } from "react-native"; 
+import { Image } from "react-native";
 import {
   Box,
   Text,
@@ -8,7 +8,7 @@ import {
   VStack,
   Pressable,
 } from "native-base";
-import CustomIcon from '../../components/CustomIcon'; 
+import CustomIcon from '../../components/CustomIcon';
 
 export default function RegisterScreen({ navigation }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -19,7 +19,8 @@ export default function RegisterScreen({ navigation }) {
       backgroundColor="white"
       justifyContent="center"
       alignItems="center"
-      paddingX={5}
+      paddingX={6}
+
     >
       <Box position="absolute" top={0} left={0}>
         <Image
@@ -28,22 +29,23 @@ export default function RegisterScreen({ navigation }) {
         />
       </Box>
       <Image
-        source={require("../../assets/images/xpertLogo.jpeg")} 
-        style={{ width: 90, height: 100, marginBottom: 20 }}      />
+        source={require("../../assets/images/xpertLogo.jpeg")}
+        style={{ width: 180, height: 180, marginBottom: 10 }} />
       <Text
         fontSize="22"
         fontWeight="bold"
         color="#74c474"
         mb={5}
       >
-        REGISTER
+        Register
       </Text>
 
       <VStack width="100%" space={4}>
-        {/* First Name Input */}
         <Box>
-          <Text fontSize="12" mb={1} color="black">
-            First Name <Text color="red">*</Text>
+          <Text fontSize="12" mb={1} color="black"
+            className="text-[16px] font-semibold"
+          >
+            First Name
           </Text>
           <Input
             variant="filled"
@@ -52,14 +54,17 @@ export default function RegisterScreen({ navigation }) {
             p={1}
             borderRadius={8}
             required
+
           />
         </Box>
 
-       
+
 
         <Box>
-          <Text fontSize="12" mb={1} color="black">
-            Last Name <Text color="red">*</Text>
+          <Text fontSize="12" mb={1} color="black"
+            className="text-[16px] font-semibold"
+          >
+            Last Name
           </Text>
           <Input
             variant="filled"
@@ -68,12 +73,15 @@ export default function RegisterScreen({ navigation }) {
             p={1}
             borderRadius={8}
             required
+
           />
         </Box>
 
         <Box>
-          <Text fontSize="12" mb={1} color="black">
-            Phone Number <Text color="red">*</Text>
+          <Text fontSize="12" mb={1} color="black"
+            className="text-[16px] font-semibold"
+          >
+            Phone Number
           </Text>
           <Input
             variant="filled"
@@ -83,12 +91,15 @@ export default function RegisterScreen({ navigation }) {
             borderRadius={8}
             keyboardType="phone-pad"
             required
+
           />
         </Box>
 
         <Box>
-          <Text fontSize="12" mb={1} color="black">
-            Email <Text color="red">*</Text>
+          <Text fontSize="12" mb={1} color="black"
+            className="text-[16px] font-semibold"
+          >
+            Email
           </Text>
           <Input
             variant="filled"
@@ -98,12 +109,15 @@ export default function RegisterScreen({ navigation }) {
             borderRadius={8}
             keyboardType="email-address"
             required
+
           />
         </Box>
 
         <Box>
-          <Text fontSize="12" mb={1} color="black">
-            Password <Text color="red">*</Text>
+          <Text fontSize="12" mb={1} color="black"
+            className="text-[16px] font-semibold"
+          >
+            Password
           </Text>
           <Input
             variant="filled"
@@ -116,14 +130,15 @@ export default function RegisterScreen({ navigation }) {
               <Pressable onPress={() => setShowPassword(!showPassword)}>
                 <CustomIcon
                   library="AntDesign"
-                  name={showPassword ? "eye" : "eyeo"} 
-                  size={20} 
+                  name={showPassword ? "eye" : "eyeo"}
+                  size={20}
                   color="gray"
-                  style={{ marginRight: 2 }} 
+                  style={{ marginRight: 2 }}
                 />
               </Pressable>
             }
             required
+
           />
         </Box>
 
@@ -141,11 +156,15 @@ export default function RegisterScreen({ navigation }) {
         </Button>
 
         <Box mt={2} flexDirection="row" justifyContent="center">
-          <Text fontSize="12" color="black">
+          <Text fontSize="12" color="black"
+            className="text-[16px] font-semibold"
+          >
             Already have an account?{" "}
           </Text>
           <Pressable onPress={() => navigation.navigate("SignInScreen")}>
-            <Text fontSize="12" color="#74c474" fontWeight="bold">
+            <Text fontSize="12" color="#74c474" fontWeight="bold"
+              className="text-[16px] font-semibold"
+            >
               Login
             </Text>
           </Pressable>

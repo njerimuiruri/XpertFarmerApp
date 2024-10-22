@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Image } from "react-native"; 
+import { Image } from "react-native";
 import {
   Box,
   Text,
@@ -39,8 +39,8 @@ export default function Otp({ navigation }) {
         />
       </Box>
       <Image
-        source={require("../../assets/images/xpertLogo.jpeg")} 
-        style={{ width: 90, height: 100, marginBottom: 20 }}      />
+        source={require("../../assets/images/xpertLogo.jpeg")}
+        style={{ width: 180, height: 180, marginBottom: 10 }} />
       <Text
         fontSize="22"
         fontWeight="bold"
@@ -49,7 +49,7 @@ export default function Otp({ navigation }) {
       >
         OTP
       </Text>
-      
+
       <Text fontSize="14" marginBottom={4} color="black" textAlign="center">
         Enter OTP sent to your Phone number
       </Text>

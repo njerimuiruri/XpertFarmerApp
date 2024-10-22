@@ -1,4 +1,4 @@
-import {AnimationObject} from 'lottie-react-native';
+import { AnimationObject } from 'lottie-react-native';
 
 export interface OnboardingData {
   id: number;
@@ -12,24 +12,25 @@ const data: OnboardingData[] = [
   {
     id: 1,
     animation: require('../assets/loading-1.json'),
-    text: 'Streamline Your Data Collection',
+    text: 'Capture Every Aspect of Your Farm',
     textColor: 'white',
     backgroundColor: '#001118',
   },
   {
     id: 2,
     animation: require('../assets/loading1.json'),
-    text: 'Effortlessly Manage Complex Surveys',
+    text: 'Streamline Your Data Management',
     textColor: 'white',
     backgroundColor: '#004d6d',
   },
   {
     id: 3,
     animation: require('../assets/loading3.json'),
-    text: 'Analyze Results with Advanced Tools',
+    text: 'Transform Data into Actionable Insights',
     textColor: 'white',
-    backgroundColor: '#0089c2',
+    backgroundColor: '#001118',
   },
 ];
+
 
 export default data;

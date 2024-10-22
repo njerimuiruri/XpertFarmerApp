@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { Image, Modal } from "react-native";
-import { 
-  View, 
-  Text, 
-  Button, 
-  Input, 
-  VStack, 
-  Pressable, 
-  Center 
+import {
+  View,
+  Text,
+  Button,
+  Input,
+  VStack,
+  Pressable,
+  Center,
+  Box
 } from "native-base";
-import CustomIcon from '../../components/CustomIcon';  
+import CustomIcon from '../../components/CustomIcon';
 
 export default function ResetPassword({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -27,15 +28,16 @@ export default function ResetPassword({ navigation }) {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 20, backgroundColor: 'white' }}>
-      <View style={{ position: "absolute", top: 0, left: 0 }}>
+
+      <Box position="absolute" top={0} left={0}>
         <Image
           source={require("../../assets/images/top-left-decoration.png")}
           style={{ width: 208, height: 144 }}
         />
-      </View>
+      </Box>
       <Image
-        source={require("../../assets/images/xpertLogo.jpeg")} 
-        style={{ width: 90, height: 100, marginBottom: 20 }}      />
+        source={require("../../assets/images/xpertLogo.jpeg")}
+        style={{ width: 180, height: 180, marginBottom: 10 }} />
       <Text fontSize="22" fontWeight="bold" marginBottom={5}>
         Reset Password
       </Text>
@@ -91,7 +93,7 @@ export default function ResetPassword({ navigation }) {
       <Button
         onPress={handleSubmit}
         width="100%"
-        backgroundColor="#74c474" 
+        backgroundColor="#74c474"
         marginTop={5}
         borderRadius={8}
       >
@@ -106,20 +108,20 @@ export default function ResetPassword({ navigation }) {
       >
         <Center flex={1} backgroundColor="rgba(0,0,0,0.5)">
           <View style={{ width: 300, padding: 20, backgroundColor: 'white', borderRadius: 10, alignItems: 'center' }}>
-            <View style={{ 
-              width: 60, 
-              height: 60, 
-              borderRadius: 30, 
-              backgroundColor: "#74c474", 
-              justifyContent: 'center', 
-              alignItems: 'center', 
-              marginBottom: 20 
+            <View style={{
+              width: 60,
+              height: 60,
+              borderRadius: 30,
+              backgroundColor: "#74c474",
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginBottom: 20
             }}>
               <CustomIcon
-                library="MaterialIcons" 
-                name="shield" 
+                library="MaterialIcons"
+                name="shield"
                 size={30}
-                style={{ color: "white" }} 
+                style={{ color: "white" }}
               />
             </View>
 
@@ -134,7 +136,7 @@ export default function ResetPassword({ navigation }) {
               borderRadius={5}
               onPress={() => {
                 setModalVisible(false);
-                navigation.navigate('SignInScreen'); 
+                navigation.navigate('SignInScreen');
               }}
             >
               <Text color="white" fontWeight="bold">Login</Text>

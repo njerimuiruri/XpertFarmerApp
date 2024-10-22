@@ -74,8 +74,8 @@ const RenderItem = ({ index, x, item }) => {
         <Image
           source={require('../../../assets/images/xpertLogo.jpeg')}
           resizeMode="center"
-          height={150}
-          width={150}
+          height={180}
+          width={180}
           alt='logo'
           style={{ marginTop: 40 }}
         />
