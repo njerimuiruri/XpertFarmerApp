@@ -19,6 +19,10 @@ import {
   OnboardingScreen,
   ResetPassword,
   EmailOtpScreen,
+  FarmRecord,
+  ProfileScreen,
+  // AddFarmDetails,
+  
 } from "./src/screens/index";
 
 export default function App() {
@@ -106,17 +110,32 @@ export default function App() {
                 component={ResetPassword}
                 options={{ headerShown: false }}
               />
+               <Stack.Screen
+                name="EmailOtpScreen"
+                component={EmailOtpScreen}
+                options={{ headerShown: false }}
+              />
               <Stack.Screen
                 name="HomeScreen"
                 component={HomeScreen}
                 options={{ headerShown: false }}
               />
-
-              <Stack.Screen
-                name="EmailOtpScreen"
-                component={EmailOtpScreen}
+ <Stack.Screen
+                name="ProfileScreen"
+                component={ProfileScreen}
                 options={{ headerShown: false }}
               />
+              <Stack.Screen
+                name="FarmRecord"
+                component={FarmRecord}
+                options={{ headerShown: false }}
+              />
+               {/* <Stack.Screen
+                name="AddFarmDetails"
+                component={AddFarmDetails}
+                options={{ headerShown: false }}
+              /> */}
+             
             </Stack.Navigator>
           </NavigationContainer>
         </ToastProvider>

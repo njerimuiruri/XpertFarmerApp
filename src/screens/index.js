@@ -6,6 +6,11 @@ import ResetPassword from "../screens/Auth/reset-password";
 import EmailOtpScreen from "../screens/Auth/Email-Otp-Screen";
 
 import HomeScreen from "./Home/home";
+
+import FarmRecord from "./Home/Farm-records";
+import ProfileScreen from "./Home/profile-screen";
+import AddFarmdetails from "./Home/AddFarm-details";
+
 import OnboardingScreen from "./Onboarding/OnboardingScreen";
 
 export {
@@ -17,6 +22,8 @@ export {
   OnboardingScreen,
   ResetPassword,
   EmailOtpScreen,
-
+  FarmRecord,
+  ProfileScreen,
+  AddFarmdetails,
   
 };
