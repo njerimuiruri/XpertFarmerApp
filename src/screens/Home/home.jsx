@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, Pressable } from 'react-native';
+import Header from '../../components/headers/main-header';
 
-const Dashboard = () => {
+const Dashboard = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Dashboard</Text>
+    <View>
+      <Header navigation={navigation} />
+      {/* <Text style={styles.text}>Dashboard</Text> */}
     </View>
   );
 };

@@ -1,43 +1,42 @@
-import React, {useCallback, useEffect, useRef} from 'react';
-import {StyleSheet, View, Image, Animated} from 'react-native';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import {COLORS, icons} from '../constants';
-import {ClassScreen, Home} from '../screens';
-import {useDrawerStatus} from '@react-navigation/drawer';
-import LottieView from 'lottie-react-native';
-import FastImage from 'react-native-fast-image';
+import React, { useCallback, useEffect, useRef } from "react";
+import { View, Animated } from "react-native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { HomeScreen } from "../screens";
+import { useDrawerStatus } from "@react-navigation/drawer";
+import FastImage from "react-native-fast-image";
+import { COLORS } from "../constants/theme";
+import { icons } from "../constants";
 
 const Tab = createMaterialTopTabNavigator();
 
 const TabArr = [
   {
-    route: 'Home',
-    label: 'HomeLayout',
-    activeIcon: icons.home,
-    inActiveIcon: require('../assets/icons/setting.png'),
-    Component: Home,
+    route: "Livestock",
+    label: "Livestock",
+    activeIcon: icons.livestock,
+    inActiveIcon: icons.livestock,
+    Component: HomeScreen,
   },
   {
-    route: 'Class',
-    label: 'Class',
-    activeIcon: icons.people,
-    inActiveIcon: require('../assets/icons/setting.png'),
-    Component: ClassScreen,
+    route: "Crops",
+    label: "Crops",
+    activeIcon: icons.crops,
+    inActiveIcon: icons.crops,
+    Component: HomeScreen,
   },
   {
-    route: 'Account',
-    label: 'Account',
-    activeIcon: icons.account,
-    inActiveIcon: require('../assets/icons/setting.png'),
-    Component: Home,
+    route: "Reports",
+    label: "Reports",
+    activeIcon: icons.analysis,
+    inActiveIcon: icons.analysis,
+    Component: HomeScreen,
   },
 ];
 
-export default function Tabs({navigation}) {
+export default function Tabs({ navigation }) {
   const drawerStatus = useDrawerStatus();
   const offsetValue = useRef(new Animated.Value(0)).current;
   const scaleValue = useRef(new Animated.Value(1)).current;
-  const borderRadius = useRef(new Animated.Value(0)).current;
 
   const openDrawer = useCallback(() => {
     Animated.timing(offsetValue, {
@@ -45,17 +44,7 @@ export default function Tabs({navigation}) {
       duration: 250,
       useNativeDriver: true,
     }).start();
-    Animated.timing(scaleValue, {
-      toValue: 0.9,
-      duration: 250,
-      useNativeDriver: true,
-    }).start();
-    Animated.timing(borderRadius, {
-      toValue: 10,
-      duration: 250,
-      useNativeDriver: true,
-    }).start();
-  }, [offsetValue, scaleValue, borderRadius]);
+  }, [offsetValue]);
 
   const closeDrawer = useCallback(() => {
     Animated.timing(offsetValue, {
@@ -63,100 +52,78 @@ export default function Tabs({navigation}) {
       duration: 150,
       useNativeDriver: true,
     }).start();
-    Animated.timing(scaleValue, {
-      toValue: 1,
-      duration: 150,
-      useNativeDriver: true,
-    }).start();
-    Animated.timing(borderRadius, {
-      toValue: 0,
-      duration: 150,
-      useNativeDriver: true,
-    }).start();
-  }, [offsetValue, scaleValue, borderRadius]);
+  }, [offsetValue]);
 
   useEffect(() => {
-    drawerStatus === 'open' ? openDrawer() : closeDrawer();
+    drawerStatus === "open" ? openDrawer() : closeDrawer();
   }, [drawerStatus, openDrawer, closeDrawer]);
 
   return (
-    <View style={{backgroundColor: '#020a3b', flex: 1}}>
+    <View style={{ backgroundColor: "green", flex: 1 }}>
       <Animated.View
         style={{
-          transform: [{scale: scaleValue}, {translateX: offsetValue}],
+          transform: [{ scale: scaleValue }, { translateX: offsetValue }],
           flex: 1,
           borderRadius: 10,
-        }}>
+        }}
+      >
         <Tab.Navigator
           tabBarPosition="bottom"
           screenOptions={{
-            lazy: true,
-            lazyPlaceholder: () => (
-              <View className="bg-gray-100 h-full w-screen relative">
-                <View
-                  className={`absolute top-[38%] left-[34%]
-              `}>
-                  <LottieView
-                    source={require('../assets/lottie/splashloader.json')}
-                    autoPlay
-                    loop
-                    width={150}
-                    height={150}
-                  />
-                </View>
-              </View>
-            ),
-            tabBarPressColor: 'transparent',
+            lazy: false,
+            tabBarPressColor: "transparent",
             swipeEnabled: false,
             tabBarShowLabel: true,
             tabBarIndicatorStyle: {
-              position: 'absolute',
+              position: "absolute",
               top: 0,
               height: 5,
-              left: 30,
+              left: 20,
               width: 80,
               backgroundColor: COLORS.secondary,
               borderBottomRightRadius: 3,
               borderBottomLeftRadius: 3,
             },
             tabBarLabelStyle: {
-              fontWeight: '600',
-              fontFamily: 'serif',
-              fontSize: 11,
-              position: 'relative',
-              top: -0,
+              fontWeight: "800",
+              fontFamily: "serif",
+              fontSize: 12,
+              position: "relative",
+              top: 6,
               left: 3,
-              textTransform: 'capitalize',
+              textTransform: "capitalize",
             },
             tabBarStyle: {
-              height: 65,
+              height: 67,
               borderTopWidth: 1,
-              borderColor: '#E6E7E8',
-              backgroundColor: 'white',
+              borderColor: "#E6E7E8",
+              backgroundColor: "white",
             },
             tabBarActiveTintColor: COLORS.secondary,
-            tabBarInactiveTintColor: 'black',
-          }}>
+            tabBarInactiveTintColor: "black",
+          }}
+        >
           {TabArr.map((tab, index) => {
-            const {route, Component, activeIcon, inActiveIcon} = tab;
+            const { route, Component, activeIcon } = tab;
             return (
               <Tab.Screen
                 key={index}
                 name={route}
                 options={{
-                  tabBarIcon: ({color, size, focused}) => (
+                  tabBarIcon: ({ focused }) => (
                     <FastImage
                       source={activeIcon}
                       style={{
-                        width: 30,
-                        height: 30,
+                        width: 38,
+                        height: 38,
                       }}
                       resizeMode="contain"
-                      tintColor={focused ? COLORS.secondary : 'gray'}
+                      tintColor={focused ? COLORS.secondary : "gray"}
                     />
                   ),
-                }}>
-                {props => <Component {...props} navigation={navigation} />}
+                }}
+              >
+                {(props) => <Component {...props} navigation={navigation} />}
               </Tab.Screen>
             );
           })}
@@ -165,9 +132,3 @@ export default function Tabs({navigation}) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  customFont: {
-    fontFamily: 'serif',
-  },
-});

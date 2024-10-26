@@ -34,6 +34,11 @@ export default function ResetPassword({ navigation }) {
           source={require("../../assets/images/top-left-decoration.png")}
           style={{ width: 208, height: 144 }}
         />
+        <CustomIcon
+          library="AntDesign"
+          name={showPassword ? "eye" : "eyeo"}
+          size={5}
+        />
       </Box>
       <Image
         source={require("../../assets/images/xpertLogo.jpeg")}

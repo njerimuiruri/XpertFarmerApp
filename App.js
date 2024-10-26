@@ -22,8 +22,8 @@ import {
   FarmRecord,
   ProfileScreen,
   // AddFarmDetails,
-  
 } from "./src/screens/index";
+import DrawerNav from "./src/navigation/drawer/DrawerNav1";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -86,6 +86,11 @@ export default function App() {
                 />
               ) : null}
               <Stack.Screen
+                name="DrawerNav"
+                component={DrawerNav}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
                 name="SignInScreen"
                 component={LoginScreen}
                 options={{ headerShown: false }}
@@ -110,7 +115,7 @@ export default function App() {
                 component={ResetPassword}
                 options={{ headerShown: false }}
               />
-               <Stack.Screen
+              <Stack.Screen
                 name="EmailOtpScreen"
                 component={EmailOtpScreen}
                 options={{ headerShown: false }}
@@ -120,7 +125,7 @@ export default function App() {
                 component={HomeScreen}
                 options={{ headerShown: false }}
               />
- <Stack.Screen
+              <Stack.Screen
                 name="ProfileScreen"
                 component={ProfileScreen}
                 options={{ headerShown: false }}
@@ -130,12 +135,11 @@ export default function App() {
                 component={FarmRecord}
                 options={{ headerShown: false }}
               />
-               {/* <Stack.Screen
+              {/* <Stack.Screen
                 name="AddFarmDetails"
                 component={AddFarmDetails}
                 options={{ headerShown: false }}
               /> */}
-             
             </Stack.Navigator>
           </NavigationContainer>
         </ToastProvider>

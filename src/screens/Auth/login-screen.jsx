@@ -80,7 +80,7 @@ export default function LoginScreen({ navigation }) {
         </Box>
 
         <Button
-          onPress={() => { }}
+          onPress={() => navigation.navigate('DrawerNav')}
           width="100%"
           mt={5}
           backgroundColor="#74c474"
