@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Text,
-  ScrollView,
-  VStack,
-  HStack,
-  Pressable,
-  Center,
-} from "native-base";
-import CustomIcon from '../../components/CustomIcon';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import FastImage from 'react-native-fast-image';
+import { COLORS } from '../../constants/theme';
+import { icons } from '../../constants';
+import { Fab } from 'native-base';
 
-export default function FarmRecordsScreen({ navigation }) {
-  const [expandedIndex, setExpandedIndex] = useState(0);
+const FarmRecordsScreen = ({ navigation }) => {
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
   const farmRecords = [
     {
@@ -23,8 +18,8 @@ export default function FarmRecordsScreen({ navigation }) {
         "Administrative Location": "Nyanza",
         "Location": "Nyanza",
         "Plot size": "20SQ BY 70SQ",
-        "Farm size": "2000"
-      }
+        "Farm size": "2000",
+      },
     },
     {
       title: "FARM TWO",
@@ -35,9 +30,9 @@ export default function FarmRecordsScreen({ navigation }) {
         "Administrative Location": "Nyanza",
         "Location": "Nyanza",
         "Plot size": "15SQ BY 50SQ",
-        "Farm size": "1500"
-      }
-    }
+        "Farm size": "1500",
+      },
+    },
   ];
 
   const toggleExpand = (index) => {
@@ -45,66 +40,144 @@ export default function FarmRecordsScreen({ navigation }) {
   };
 
   return (
-    <Box flex={1} bg="#f5f5f5" mt={10}>
-      <Box bg="white" pt={4} pb={2}>
-        <VStack space={1} px={4}>
-          <HStack alignItems="center" justifyContent="space-between">
-            <Pressable onPress={() => navigation.goBack()}>
-              <CustomIcon
-                library="AntDesign"
-                name="left"
-                size={24}
-                color="black"
+    <View style={{ flex: 1, backgroundColor: '#f5f5f5' }}>
+      <View style={[styles.header, { backgroundColor: COLORS.green2 }]}>
+        <View style={styles.headerContent}>
+          <View style={styles.headerLeft}>
+            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.iconContainer}>
+              <FastImage
+                source={icons.backarrow}
+                style={styles.icon}
+                tintColor="white"
               />
-            </Pressable>
+            </TouchableOpacity>
+          </View>
 
-            <Center flex={1}>
-              <Text fontSize="md" fontWeight="medium">
-                Farm records
-              </Text>
-            </Center>
+          <Text style={[styles.headerTitle, styles.customFont]}>
+            Farm Records
+          </Text>
 
-            <Pressable onPress={() => navigation.navigate('Settings')}>
-              <CustomIcon
-                library="AntDesign"
-                name="setting"
-                size={24}
-                color="black"
+          <View style={styles.headerRight}>
+            <TouchableOpacity onPress={() => navigation.navigate('Settings')} style={styles.iconContainer}>
+              <FastImage
+                source={icons.settings}
+                style={styles.icon}
+                tintColor="white"
               />
-            </Pressable>
-          </HStack>
-        </VStack>
-      </Box>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
 
-      <ScrollView bg="#e5f3e5" p={4}>
+      <Fab renderInPortal={false} shadow={2} right={5} bottom={5} size="sm" icon={<FastImage source={icons.plus} className="w-[20px] h-[20px]" tintColor='white' />} colorScheme="emerald" onPress={() => navigation.navigate('AddFarmDetailsScreen')} />
+
+      <ScrollView style={styles.scrollView}>
         {farmRecords.map((farm, index) => (
-          <Box key={index} mb={6} bg="white">
-            <Pressable onPress={() => toggleExpand(index)} px={4} py={3}>
-              <Text color="#4CAF50" fontSize="sm" fontWeight="medium">
+          <View key={index} style={styles.farmContainer}>
+            <TouchableOpacity onPress={() => toggleExpand(index)} style={styles.farmTitleContainer}>
+              <Text style={[styles.farmTitle, { color: COLORS.green2 }]}>
                 {farm.title}
               </Text>
-              <Box h="0.5" bg="#4CAF50" opacity={0.3} mt={2} />
-            </Pressable>
+              <View style={[styles.divider, { backgroundColor: COLORS.green2 }]} />
+            </TouchableOpacity>
             {expandedIndex === index && (
-              <Box px={4} pb={2}>
-                {Object.entries(farm.details).map(([key, value], detailIndex, arr) => (
-                  <Box 
-                    key={detailIndex}
-                    borderBottomWidth={detailIndex === arr.length - 1 ? 0 : 0.5}
-                    borderBottomColor={detailIndex === arr.length - 1 ? "transparent" : "#E0E0E0"}
-                    py={3}
-                  >
-                    <HStack justifyContent="space-between">
-                      <Text color="gray.700" fontSize="sm">{key}</Text>
-                      <Text color="gray.900" fontSize="sm">{value}</Text>
-                    </HStack>
-                  </Box>
+              <View style={styles.detailsContainer}>
+                {Object.entries(farm.details).map(([key, value], detailIndex) => (
+                  <View key={detailIndex} style={[
+                    styles.detailRow,
+                    detailIndex === Object.keys(farm.details).length - 1 && { borderBottomWidth: 0 }
+                  ]}>
+                    <Text style={styles.detailKey}>{key}</Text>
+                    <Text style={styles.detailValue}>{value}</Text>
+                  </View>
                 ))}
-              </Box>
+              </View>
             )}
-          </Box>
+          </View>
         ))}
       </ScrollView>
-    </Box>
+    </View>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  header: {
+    backgroundColor: COLORS.green2,
+    paddingTop: 40,
+    paddingBottom: 10,
+    paddingHorizontal: 16,
+  },
+  headerContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  headerTitle: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    flex: 1,
+  },
+  iconContainer: {
+    padding: 5,
+  },
+  icon: {
+    width: 24,
+    height: 24,
+  },
+  headerLeft: {
+    flex: 0.3,
+    alignItems: 'flex-start',
+  },
+  headerRight: {
+    flex: 0.3,
+    alignItems: 'flex-end',
+  },
+  scrollView: {
+    backgroundColor: '#e5f3e5',
+    padding: 16,
+  },
+  farmContainer: {
+    marginBottom: 16,
+    backgroundColor: 'white',
+  },
+  farmTitleContainer: {
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  farmTitle: {
+    fontSize: 16,
+    fontWeight: 'medium',
+    color: COLORS.green2,
+  },
+  divider: {
+    height: 0.5,
+    opacity: 0.3,
+    marginTop: 8,
+  },
+  detailsContainer: {
+    paddingHorizontal: 16,
+    paddingBottom: 12,
+  },
+  detailRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#E0E0E0',
+    paddingVertical: 8,
+  },
+  detailKey: {
+    color: 'gray',
+    fontSize: 14,
+  },
+  detailValue: {
+    color: 'black',
+    fontSize: 14,
+  },
+  customFont: {
+    fontFamily: 'serif',
+  },
+});
+
+export default FarmRecordsScreen;
