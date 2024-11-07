@@ -21,9 +21,13 @@ import {
   EmailOtpScreen,
   FarmRecord,
   ProfileScreen,
-  AddFarmDetails,
+  AddFarmDetailsScreen,
   AddEmployeeScreen,
   FarmEmployeeTableScreen,
+  EditEmployeeScreen,
+  AddFlockDetailsScreen,
+  AddLivestockScreen,
+  AddLivestockGroupScreen,
 } from "./src/screens/index";
 import DrawerNav from "./src/navigation/drawer/DrawerNav1";
 
@@ -137,11 +141,11 @@ export default function App() {
                 component={FarmRecord}
                 options={{ headerShown: false }}
               />
-              {/* <Stack.Screen
-                name="AddFarmDetails"
-                component={AddFarmDetails}
+              <Stack.Screen
+                name="AddFarmDetailsScreen"
+                component={AddFarmDetailsScreen}
                 options={{ headerShown: false }}
-              /> */}
+              />
               <Stack.Screen
                 name="AddEmployeeScreen"
                 component={AddEmployeeScreen}
@@ -150,6 +154,26 @@ export default function App() {
               <Stack.Screen
                 name="FarmEmployeeTableScreen"
                 component={FarmEmployeeTableScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="EditEmployeeScreen"
+                component={EditEmployeeScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="AddFlockDetailsScreen"
+                component={AddFlockDetailsScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="AddLivestockScreen"
+                component={AddLivestockScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="AddLivestockGroupScreen"
+                component={AddLivestockGroupScreen}
                 options={{ headerShown: false }}
               />
             </Stack.Navigator>

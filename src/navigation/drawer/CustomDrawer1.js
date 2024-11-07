@@ -51,20 +51,6 @@ const CustomDrawer1 = (props) => {
       </View>
       <DrawerContentScrollView {...props} style={[styles.view]}>
         <DrawerItemList {...props} />
-        <TouchableOpacity
-          className="flex flex-row items-center space-x-7 relative left-[19px] mt-[10px] z-[999]"
-          onPress={() => {
-            navigation.navigate("SignIn2"), navigation.closeDrawer();
-          }}
-        >
-          <FastImage
-            source={icons.logout}
-            className="w-[29px] h-[27px] ml-0.5"
-            resizeMode={FastImage.resizeMode.contain}
-            tintColor={"white"}
-          />
-          <Text className="text-white font-semibold">LogOut</Text>
-        </TouchableOpacity>
       </DrawerContentScrollView>
 
       {/* footer */}

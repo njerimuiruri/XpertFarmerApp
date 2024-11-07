@@ -11,28 +11,30 @@ import {
 } from 'native-base';
 import FastImage from 'react-native-fast-image';
 import { COLORS } from '../../constants/theme';
-import { icons } from '../../constants'; 
+import { icons } from '../../constants';
+import { TouchableOpacity } from 'react-native';
 
 export default function ProfileScreen({ navigation }) {
   return (
     <Box flex={1} bg="white">
       <Box bg={COLORS.green2} h={200} borderBottomLeftRadius={200} borderBottomRightRadius={200} position="relative">
         <HStack alignItems="center" justifyContent="space-between" px={4} mt={8}>
-          <Pressable onPress={() => navigation.openDrawer()}>
-          <FastImage
-              source={require('../../assets/icons/hamburger.png')}
-              className="w-[30px] h-[25px] p-3"
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <FastImage
+              source={icons.backarrow}
+              className="w-[35px] h-[35px] p-3"
               resizeMode="contain"
               tintColor="white"
             />
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate('Settings')}>
+          </TouchableOpacity>
+          <TouchableOpacity >
             <FastImage
-              source={icons.settings} 
-              style={{ width: 24, height: 24 }}
+              source={icons.settings}
+              className="w-[30px] h-[30px] p-3"
+              resizeMode="contain"
               tintColor="white"
             />
-          </Pressable>
+          </TouchableOpacity>
         </HStack>
 
         <Center mt={8}>
@@ -42,9 +44,9 @@ export default function ProfileScreen({ navigation }) {
         </Center>
       </Box>
 
-      <Center mt={-50}> 
+      <Center mt={-50}>
         <Image
-          source={require('../../assets/images/profile-avatar.png')} 
+          source={require('../../assets/images/profile-avatar.png')}
           style={{ width: 120, height: 120, borderRadius: 60, borderWidth: 2, borderColor: "white" }}
           alt="Profile Image"
         />

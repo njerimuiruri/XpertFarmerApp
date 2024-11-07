@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-nati
 import FastImage from 'react-native-fast-image';
 import { COLORS } from '../../constants/theme';
 import { icons } from '../../constants';
+import { Fab } from 'native-base';
 
 const FarmRecordsScreen = ({ navigation }) => {
   const [expandedIndex, setExpandedIndex] = useState(null);
@@ -45,10 +46,23 @@ const FarmRecordsScreen = ({ navigation }) => {
           <View style={styles.headerLeft}>
             <TouchableOpacity onPress={() => navigation.goBack()} style={styles.iconContainer}>
               <FastImage
-                source={icons.backarrow} 
+                source={icons.backarrow}
                 style={styles.icon}
                 tintColor="white"
               />
+            </TouchableOpacity>
+          </View>
+
+          <Text style={[styles.headerTitle, styles.customFont]}>
+            Farm Records
+          </Text>
+
+          <View style={styles.headerRight}>
+            <TouchableOpacity onPress={() => navigation.navigate('Settings')} style={styles.iconContainer}>
+              <FastImage
+                source={icons.settings}
+                style={styles.icon}
+                tintColor="white"
             </TouchableOpacity>
           </View>
 
@@ -67,6 +81,8 @@ const FarmRecordsScreen = ({ navigation }) => {
           </View>
         </View>
       </View>
+
+      <Fab renderInPortal={false} shadow={2} right={5} bottom={5} size="sm" icon={<FastImage source={icons.plus} className="w-[20px] h-[20px]" tintColor='white' />} colorScheme="emerald" onPress={() => navigation.navigate('AddFarmDetailsScreen')} />
 
       <ScrollView style={styles.scrollView}>
         {farmRecords.map((farm, index) => (
@@ -146,7 +162,7 @@ const styles = StyleSheet.create({
   farmTitle: {
     fontSize: 16,
     fontWeight: 'medium',
-    color: COLORS.green2, 
+    color: COLORS.green2,
   },
   divider: {
     height: 0.5,

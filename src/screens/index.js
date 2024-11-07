@@ -9,11 +9,15 @@ import HomeScreen from "./Home/home";
 
 import FarmRecord from "./Home/Farm-records";
 import ProfileScreen from "./Home/profile-screen";
-import AddFarmdetails from "./Home/AddFarm-details";
-import AddEmployeeScreen from "./Home/AddEmployeeScreen";
-import FarmEmployeeTableScreen from "./Home/FarmEmployeeTableScreen";
+import AddFarmDetailsScreen from "./farm/AddFarm-details";
 
 import OnboardingScreen from "./Onboarding/OnboardingScreen";
+import FarmEmployeeTableScreen from "./employee/FarmEmployeeTableScreen";
+import EditEmployeeScreen from "./employee/EditEmployeeScreen";
+import AddEmployeeScreen from "./employee/AddEmployeeScreen";
+import AddFlockDetailsScreen from "./livestock/AddFlockDetails";
+import AddLivestockScreen from "./livestock/AddLivestockDetails";
+import AddLivestockGroupScreen from "./livestock/AddGroupLivestock";
 
 export {
   LoginScreen,
@@ -26,8 +30,11 @@ export {
   EmailOtpScreen,
   FarmRecord,
   ProfileScreen,
-  AddFarmdetails,
+  AddFarmDetailsScreen,
   AddEmployeeScreen,
   FarmEmployeeTableScreen,
-  
+  EditEmployeeScreen,
+  AddFlockDetailsScreen,
+  AddLivestockScreen,
+  AddLivestockGroupScreen,
 };

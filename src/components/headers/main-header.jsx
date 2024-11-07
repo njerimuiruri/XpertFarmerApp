@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { COLORS } from '../../constants/theme';
 import { icons } from '../../constants';
@@ -27,7 +27,7 @@ const Header = ({ navigation }) => {
         <Text
           className="text-white gray-900 text-[20px] font-bold text-center"
           style={styles.customFont}>
-          XpertFarmers
+          XpertFarmer
         </Text>
         <View className="flex flex-row space-x-6">
           <TouchableOpacity>
