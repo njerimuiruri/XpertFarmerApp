@@ -9,23 +9,34 @@ import {
   Image,
   Button,
 } from 'native-base';
-import CustomIcon from '../../components/CustomIcon';
+import FastImage from 'react-native-fast-image';
+import { COLORS } from '../../constants/theme';
+import { icons } from '../../constants'; 
 
 export default function ProfileScreen({ navigation }) {
   return (
     <Box flex={1} bg="white">
-      <Box bg="#8cd18c" h={200} borderBottomLeftRadius={200} borderBottomRightRadius={200} position="relative">
+      <Box bg={COLORS.green2} h={200} borderBottomLeftRadius={200} borderBottomRightRadius={200} position="relative">
         <HStack alignItems="center" justifyContent="space-between" px={4} mt={8}>
           <Pressable onPress={() => navigation.openDrawer()}>
-            <CustomIcon library="Feather" name="menu" size={24} color="black" />
+          <FastImage
+              source={require('../../assets/icons/hamburger.png')}
+              className="w-[30px] h-[25px] p-3"
+              resizeMode="contain"
+              tintColor="white"
+            />
           </Pressable>
           <Pressable onPress={() => navigation.navigate('Settings')}>
-            <CustomIcon library="Feather" name="settings" size={24} color="black" />
+            <FastImage
+              source={icons.settings} 
+              style={{ width: 24, height: 24 }}
+              tintColor="white"
+            />
           </Pressable>
         </HStack>
 
         <Center mt={8}>
-          <Text fontSize="md" fontWeight="bold" color="black">
+          <Text fontSize="md" fontWeight="bold" color="white">
             Profile details
           </Text>
         </Center>
@@ -40,29 +51,29 @@ export default function ProfileScreen({ navigation }) {
       </Center>
 
       <VStack mt={8} px={4} space={4}>
-        <HStack justifyContent="space-between" borderBottomWidth={1} borderBottomColor="#8cd18c" py={3}>
+        <HStack justifyContent="space-between" borderBottomWidth={1} borderBottomColor={COLORS.green2} py={3}>
           <Text fontSize="md" color="gray.700">First name</Text>
           <Text fontSize="md" color="black">Jane</Text>
         </HStack>
 
-        <HStack justifyContent="space-between" borderBottomWidth={1} borderBottomColor="#8cd18c" py={3}>
+        <HStack justifyContent="space-between" borderBottomWidth={1} borderBottomColor={COLORS.green2} py={3}>
           <Text fontSize="md" color="gray.700">Second name</Text>
           <Text fontSize="md" color="black">Doe</Text>
         </HStack>
 
-        <HStack justifyContent="space-between" borderBottomWidth={1} borderBottomColor="#8cd18c" py={3}>
+        <HStack justifyContent="space-between" borderBottomWidth={1} borderBottomColor={COLORS.green2} py={3}>
           <Text fontSize="md" color="gray.700">Phone number</Text>
           <Text fontSize="md" color="black">0707625331</Text>
         </HStack>
 
-        <HStack justifyContent="space-between" borderBottomWidth={1} borderBottomColor="#8cd18c" py={3}>
+        <HStack justifyContent="space-between" borderBottomWidth={1} borderBottomColor={COLORS.green2} py={3}>
           <Text fontSize="md" color="gray.700">Email Address</Text>
           <Text fontSize="md" color="black">support@yahoo.com</Text>
         </HStack>
       </VStack>
 
       <Center flex={1} justifyContent="flex-end" mb={8}>
-        <Button bg="#8cd18c" width="60%" borderRadius={25} _text={{ color: "white", fontWeight: "bold" }}>
+        <Button bg={COLORS.green2} width="60%" borderRadius={25} _text={{ color: "white", fontWeight: "bold" }}>
           Edit Profile
         </Button>
       </Center>

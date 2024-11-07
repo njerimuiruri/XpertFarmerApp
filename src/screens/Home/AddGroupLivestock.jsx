@@ -1,65 +1,38 @@
 import React, { useState } from "react";
 import { View, ScrollView as RNScrollView, StyleSheet } from "react-native";
-import { Text, Input, Button, Select, CheckIcon, Radio, Modal, VStack, HStack, Pressable, Toast } from "native-base";
+import { Text, Input, Button, Select, CheckIcon, Modal, VStack, HStack, Pressable } from "native-base";
 import FastImage from 'react-native-fast-image';
 import { icons } from '../../constants';
 
-export default function AddLivestockScreen({ navigation }) {
+export default function AddLivestockGroupScreen({ navigation }) {
   const [formData, setFormData] = useState({
-    idNumber: "",
-    breedType: "",
-    phenotype: "",
-    dateOfBirth: "",
-    gender: "",
-    sirePhenotype: "",
-    dam: "",
-    weight: ""
+    groupName: "",
+    groupId: "",
+    selectedAnimalIds: [],
   });
 
   const [showModal, setShowModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = () => {
-    const { idNumber, breedType, phenotype, dateOfBirth, gender, sirePhenotype, dam, weight } = formData;
-    
-    if (!idNumber || !breedType || !phenotype || !dateOfBirth || !gender || !sirePhenotype || !dam || !weight) {
-      Toast.show({
-        title: "Error",
-        status: "error",
-        description: "Please fill in all fields before submitting.",
-      });
-      return;
-    }
-
-    setIsLoading(true);
-    setTimeout(() => {
-      console.log('Form submitted:', formData);
-      setIsLoading(false);
-      setShowModal(true);
-    }, 1000);
+    console.log('Group submitted:', formData);
+    setShowModal(true);
   };
 
   const handleAddAnother = () => {
     setFormData({
-      idNumber: "",
-      breedType: "",
-      phenotype: "",
-      dateOfBirth: "",
-      gender: "",
-      sirePhenotype: "",
-      dam: "",
-      weight: ""
+      groupName: "",
+      groupId: "",
+      selectedAnimalIds: [],
     });
     setShowModal(false);
   };
 
-  const renderFormField = (label, value, onChangeText, keyboardType = "default", placeholder = "") => (
+  const renderFormField = (label, value, onChangeText, placeholder = "") => (
     <View style={styles.formField}>
       <Text style={styles.label}>{label}</Text>
       <Input
         value={value}
         onChangeText={onChangeText}
-        keyboardType={keyboardType}
         placeholder={placeholder}
         style={styles.input}
         backgroundColor="#e8f5e9"
@@ -81,7 +54,7 @@ export default function AddLivestockScreen({ navigation }) {
               tintColor="black"
             />
           </Pressable>
-          <Text style={styles.headerTitle}>Add Livestock Details</Text>
+          <Text style={styles.headerTitle}>Add Livestock Group</Text>
           <Pressable onPress={() => console.log("Settings")}>
             <FastImage
               source={icons.settings}
@@ -95,46 +68,35 @@ export default function AddLivestockScreen({ navigation }) {
 
       <RNScrollView style={styles.scrollView}>
         <View style={styles.formContainer}>
-          <Text style={styles.subtitle}>Fill in the livestock details</Text>
+          <Text style={styles.subtitle}>Fill in the group livestock details</Text>
 
-          {renderFormField("ID Number", formData.idNumber, 
-            (value) => setFormData(prev => ({ ...prev, idNumber: value })))} 
+          {renderFormField("Group Name", formData.groupName, 
+            (value) => setFormData(prev => ({ ...prev, groupName: value })))} 
 
-          {renderFormField("Breed Type", formData.breedType,
-            (value) => setFormData(prev => ({ ...prev, breedType: value })))} 
-
-          {renderFormField("Phenotype", formData.phenotype,
-            (value) => setFormData(prev => ({ ...prev, phenotype: value })))} 
-
-          {renderFormField("Date of Birth (DD/MM/YYYY)", formData.dateOfBirth,
-            (value) => setFormData(prev => ({ ...prev, dateOfBirth: value })), "default", "DD/MM/YYYY")} 
+          {renderFormField("Group ID", formData.groupId, 
+            (value) => setFormData(prev => ({ ...prev, groupId: value })))} 
 
           <View style={styles.formField}>
-            <Text style={styles.label}>Gender</Text>
-            <Radio.Group 
-              name="gender" 
-              value={formData.gender} 
-              onChange={(value) => setFormData(prev => ({ ...prev, gender: value }))}
+            <Text style={styles.label}>Select Animal IDs</Text>
+            <Select
+              selectedValue={formData.selectedAnimalIds}
+              onValueChange={(itemValue) => {
+                const selectedIds = formData.selectedAnimalIds.includes(itemValue)
+                  ? formData.selectedAnimalIds.filter(id => id !== itemValue)
+                  : [...formData.selectedAnimalIds, itemValue];
+                setFormData(prev => ({ ...prev, selectedAnimalIds: selectedIds }));
+              }}
+              placeholder="Select Animal IDs"
+              backgroundColor="#e8f5e9"
             >
-              <HStack space={4}>
-                <Radio value="Male">
-                  <Text>Male</Text>
-                </Radio>
-                <Radio value="Female">
-                  <Text>Female</Text>
-                </Radio>
-              </HStack>
-            </Radio.Group>
+              <Select.Item label="Animal ID 1" value="animal1" />
+              <Select.Item label="Animal ID 2" value="animal2" />
+              <Select.Item label="Animal ID 3" value="animal3" />
+              <Select.Item label="Animal ID 4" value="animal4" />
+              {/* Add more animal IDs as needed */}
+            </Select>
+            <CheckIcon />
           </View>
-
-          {renderFormField("Sire Phenotype", formData.sirePhenotype,
-            (value) => setFormData(prev => ({ ...prev, sirePhenotype: value })))} 
-
-          {renderFormField("Dam", formData.dam,
-            (value) => setFormData(prev => ({ ...prev, dam: value })))} 
-
-          {renderFormField("Weight (kg)", formData.weight,
-            (value) => setFormData(prev => ({ ...prev, weight: value }), "numeric"))}
 
           <HStack space={4} style={styles.buttonContainer}>
             <Button
@@ -150,7 +112,6 @@ export default function AddLivestockScreen({ navigation }) {
             <Button
               flex={1}
               onPress={handleSubmit}
-              isLoading={isLoading}
               style={[styles.button, styles.submitButton]}
             >
               <Text color="white">Submit</Text>
@@ -163,9 +124,9 @@ export default function AddLivestockScreen({ navigation }) {
         <Modal.Content style={styles.modalContent}>
           <Modal.Body>
             <VStack space={6} alignItems="center" style={styles.modalContainer}>
-              <Text style={styles.modalTitle}>Add another livestock</Text>
+              <Text style={styles.modalTitle}>Add another livestock group</Text>
               <Text style={styles.modalSubtitle}>
-                Feel free to add another livestock; the more, the better
+                Feel free to add another livestock group, the more the better
               </Text>
               <HStack space={4} width="100%">
                 <Button
@@ -223,12 +184,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     margin: 16,
     borderRadius: 12,
-    padding: 16,
+    padding: 24, // Increased padding for height
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
     elevation: 5,
+    minHeight: 400, // Set a minimum height to ensure it's taller
   },
   subtitle: {
     fontSize: 14,

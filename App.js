@@ -21,7 +21,9 @@ import {
   EmailOtpScreen,
   FarmRecord,
   ProfileScreen,
-  // AddFarmDetails,
+  AddFarmDetails,
+  AddEmployeeScreen,
+  FarmEmployeeTableScreen,
 } from "./src/screens/index";
 import DrawerNav from "./src/navigation/drawer/DrawerNav1";
 
@@ -140,6 +142,16 @@ export default function App() {
                 component={AddFarmDetails}
                 options={{ headerShown: false }}
               /> */}
+              <Stack.Screen
+                name="AddEmployeeScreen"
+                component={AddEmployeeScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="FarmEmployeeTableScreen"
+                component={FarmEmployeeTableScreen}
+                options={{ headerShown: false }}
+              />
             </Stack.Navigator>
           </NavigationContainer>
         </ToastProvider>

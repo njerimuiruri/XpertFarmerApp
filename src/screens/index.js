@@ -10,6 +10,8 @@ import HomeScreen from "./Home/home";
 import FarmRecord from "./Home/Farm-records";
 import ProfileScreen from "./Home/profile-screen";
 import AddFarmdetails from "./Home/AddFarm-details";
+import AddEmployeeScreen from "./Home/AddEmployeeScreen";
+import FarmEmployeeTableScreen from "./Home/FarmEmployeeTableScreen";
 
 import OnboardingScreen from "./Onboarding/OnboardingScreen";
 
@@ -25,5 +27,7 @@ export {
   FarmRecord,
   ProfileScreen,
   AddFarmdetails,
+  AddEmployeeScreen,
+  FarmEmployeeTableScreen,
   
 };

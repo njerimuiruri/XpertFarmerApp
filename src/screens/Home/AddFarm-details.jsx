@@ -9,55 +9,80 @@ import {
   Checkbox,
   Switch,
   ScrollView,
-  HStack,
+  HStack
 } from "native-base";
-import CustomIcon from '../../components/CustomIcon';
+import CustomIcon from '../../components/CustomIcon';  // Ensure CustomIcon is properly set up to use icons as needed
 
-export default function AddFarmDetailsScreen({ navigation }) {
-  const [enableLocation, setEnableLocation] = useState(false);
-  const [farmSize, setFarmSize] = useState("");
-  const [selectedRegion, setSelectedRegion] = useState("");
-  const [selectedDivision, setSelectedDivision] = useState("");
+export default function AddEmployeeDetailsScreen({ navigation }) {
+  const [selectedFarm, setSelectedFarm] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [dateOfEmployment, setDateOfEmployment] = useState("");
+  const [workingHours, setWorkingHours] = useState({
+    fullTime: false,
+    morningEvening: false,
+    weekendsOnly: false,
+    harvestPeriodsOnly: false
+  });
+  const [paymentRates, setPaymentRates] = useState("");
 
-  const handleAddFarm = () => {
-    if (!farmSize || !selectedRegion || !selectedDivision) {
+  const handleAddEmployee = () => {
+    if (!selectedFarm || !fullName || !phoneNumber || !dateOfEmployment) {
       alert('Please fill in all required fields.');
       return;
     }
-    console.log("Farm details saved");
-    navigation.navigate('FarmRecord');
+    console.log("Employee details saved");
+    navigation.navigate('EmployeeRecord');
   };
 
   return (
     <ScrollView>
       <Box flex={1} paddingX={4} paddingY={10} backgroundColor="white">
         <Text fontSize="20" fontWeight="bold" color="#4CAF50" mb={1}>
-          Add Farm Details
+          Add Employee Details
         </Text>
 
-        <HStack alignItems="center" >
+        <HStack alignItems="center">
           <CustomIcon
             library="AntDesign"
             name="pluscircleo"
             size={30}
             color="#4CAF50"
             style={{ marginRight: 8 }}
-            onPress={handleAddFarm}
+            onPress={handleAddEmployee}
           />
-          <Text fontSize="16" color="#4CAF50" onPress={handleAddFarm}>
-            Add another farm
+          <Text fontSize="16" color="#4CAF50" onPress={handleAddEmployee}>
+            Add another employee
           </Text>
         </HStack>
 
         <Box backgroundColor="#f0f9f0" padding={4} borderRadius={8} mt={4}>
           <Text fontSize="16" color="gray.600" mb={4}>
-            Fill in the farm details
+            Fill in the employee details
           </Text>
 
           <VStack space={4} width="100%">
             <Box>
               <Text fontSize="14" fontWeight="500" mb={1} color="gray.700">
-                Farm ID <Text color="red">*</Text>
+                Attached Farm ID <Text color="red">*</Text>
+              </Text>
+              <Select
+                selectedValue={selectedFarm}
+                minWidth="200"
+                height={10}
+                backgroundColor="white"
+                borderRadius={4}
+                placeholder="Select farm"
+                onValueChange={(itemValue) => setSelectedFarm(itemValue)}
+              >
+                <Select.Item label="Farm 1" value="farm1" />
+                <Select.Item label="Farm 2" value="farm2" />
+              </Select>
+            </Box>
+
+            <Box>
+              <Text fontSize="14" fontWeight="500" mb={1} color="gray.700">
+                Full Name <Text color="red">*</Text>
               </Text>
               <Input
                 variant="filled"
@@ -65,51 +90,15 @@ export default function AddFarmDetailsScreen({ navigation }) {
                 height={10}
                 backgroundColor="white"
                 borderRadius={4}
-                placeholder="Farm ID"
-                isDisabled={true} 
-                value="SG2728290"
+                placeholder="Enter Full Name"
+                value={fullName}
+                onChangeText={setFullName}
               />
             </Box>
 
             <Box>
               <Text fontSize="14" fontWeight="500" mb={1} color="gray.700">
-                Region <Text color="red">*</Text>
-              </Text>
-              <Select
-                selectedValue={selectedRegion}
-                minWidth="200"
-                height={10}
-                backgroundColor="white"
-                borderRadius={4}
-                placeholder="Select region"
-                onValueChange={(itemValue) => setSelectedRegion(itemValue)}
-              >
-                <Select.Item label="Region 1" value="region1" />
-                <Select.Item label="Region 2" value="region2" />
-              </Select>
-            </Box>
-
-            <Box>
-              <Text fontSize="14" fontWeight="500" mb={1} color="gray.700">
-                Division <Text color="red">*</Text>
-              </Text>
-              <Select
-                selectedValue={selectedDivision}
-                minWidth="200"
-                height={10}
-                backgroundColor="white"
-                borderRadius={4}
-                placeholder="Select division"
-                onValueChange={(itemValue) => setSelectedDivision(itemValue)}
-              >
-                <Select.Item label="Division 1" value="division1" />
-                <Select.Item label="Division 2" value="division2" />
-              </Select>
-            </Box>
-
-            <Box>
-              <Text fontSize="14" fontWeight="500" mb={1} color="gray.700">
-                Administrative Location
+                Phone Number <Text color="red">*</Text>
               </Text>
               <Input
                 variant="filled"
@@ -117,54 +106,37 @@ export default function AddFarmDetailsScreen({ navigation }) {
                 height={10}
                 backgroundColor="white"
                 borderRadius={4}
-                placeholder="Enter Administrative Location"
+                keyboardType="phone-pad"
+                placeholder="Enter Phone Number"
+                value={phoneNumber}
+                onChangeText={setPhoneNumber}
+              />
+            </Box>
+
+            <Box>
+              <Text fontSize="14" fontWeight="500" mb={1} color="gray.700">
+                Date of Employment <Text color="red">*</Text>
+              </Text>
+              <Input
+                variant="filled"
+                width="100%"
+                height={10}
+                backgroundColor="white"
+                borderRadius={4}
+                placeholder="YYYY-MM-DD"
+                value={dateOfEmployment}
+                onChangeText={setDateOfEmployment}
               />
             </Box>
 
             <Box flexDirection="row" alignItems="center" justifyContent="space-between">
               <Text fontSize="14" fontWeight="500" color="gray.700">
-                Enable location
+                Working Hours <Text color="red">*</Text>
               </Text>
-              <Switch
-                size="md"
-                onToggle={() => setEnableLocation(!enableLocation)}
-                value={enableLocation}
-              />
-            </Box>
-
-            <Box>
-              <Text fontSize="14" fontWeight="500" mb={1} color="gray.700">
-                Farm Size <Text color="red">*</Text>
-              </Text>
-              <Input
-                variant="filled"
-                width="100%"
-                height={10}
-                backgroundColor="white"
-                borderRadius={4}
-                value={farmSize}
-                onChangeText={setFarmSize}
-                keyboardType="numeric"
-                placeholder="Enter Farm Size"
-              />
-            </Box>
-
-            <Box>
-              <Text fontSize="14" fontWeight="500" mb={2} color="gray.700">
-                Types of Farming
-              </Text>
-              <Text fontSize="12" color="gray.600" mb={2}>
-                Select one or more types of farming
-              </Text>
-              <VStack space={2}>
-                <Checkbox value="dairy-cattle">Dairy cattle</Checkbox>
-                <Checkbox value="beef-cattle">Beef cattle</Checkbox>
-                <Checkbox value="dairy-meat-goat">Dairy and Meat goat</Checkbox>
-                <Checkbox value="sheep-goats">Sheep and Goats</Checkbox>
-                <Checkbox value="poultry">Poultry</Checkbox>
-                <Checkbox value="rabbit">Rabbit</Checkbox>
-                <Checkbox value="pigs">Pigs (Swine)</Checkbox>
-              </VStack>
+              <HStack space={2}>
+                <Checkbox value="Full Time" isChecked={workingHours.fullTime} onChange={() => setWorkingHours({...workingHours, fullTime: !workingHours.fullTime})}>Full Time</Checkbox>
+                <Checkbox value="Morning and Evening" isChecked={workingHours.morningEvening} onChange={() => setWorkingHours({...workingHours, morningEvening: !workingHours.morningEvening})}>Morning & Evening</Checkbox>
+              </HStack>
             </Box>
 
             <Box flexDirection="row" justifyContent="space-between" mt={4}>
@@ -181,7 +153,7 @@ export default function AddFarmDetailsScreen({ navigation }) {
                 width="45%"
                 backgroundColor="#4CAF50"
                 _text={{ color: "white" }}
-                onPress={handleAddFarm}
+                onPress={handleAddEmployee}
               >
                 Save
               </Button>

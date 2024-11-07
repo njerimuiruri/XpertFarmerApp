@@ -1,54 +1,50 @@
 import React, { useState } from "react";
 import { View, ScrollView as RNScrollView, StyleSheet } from "react-native";
-import { Text, Input, Button, Select, CheckIcon, Radio, Modal, VStack, HStack, Pressable, Toast } from "native-base";
+import { Text, Input, Button, Checkbox, Modal, VStack, HStack, Pressable } from "native-base";
 import FastImage from 'react-native-fast-image';
 import { icons } from '../../constants';
 
-export default function AddLivestockScreen({ navigation }) {
+export default function AddEmployeeScreen({ navigation }) {
   const [formData, setFormData] = useState({
-    idNumber: "",
-    breedType: "",
-    phenotype: "",
-    dateOfBirth: "",
-    gender: "",
-    sirePhenotype: "",
-    dam: "",
-    weight: ""
+    farmId: "",
+    fullName: "",
+    phone: "",
+    dateOfEmployment: "",
+    workingHours: [],
+    paymentRate: ""
   });
 
   const [showModal, setShowModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+
+  const workingHourOptions = [
+    "Full time",
+    "Morning and Evening",
+    "Weekends only",
+    "Harvest periods only"
+  ];
+
+  const handleWorkingHoursChange = (option) => {
+    setFormData(prev => ({
+      ...prev,
+      workingHours: prev.workingHours.includes(option)
+        ? prev.workingHours.filter(item => item !== option)
+        : [...prev.workingHours, option]
+    }));
+  };
 
   const handleSubmit = () => {
-    const { idNumber, breedType, phenotype, dateOfBirth, gender, sirePhenotype, dam, weight } = formData;
-    
-    if (!idNumber || !breedType || !phenotype || !dateOfBirth || !gender || !sirePhenotype || !dam || !weight) {
-      Toast.show({
-        title: "Error",
-        status: "error",
-        description: "Please fill in all fields before submitting.",
-      });
-      return;
-    }
-
-    setIsLoading(true);
-    setTimeout(() => {
-      console.log('Form submitted:', formData);
-      setIsLoading(false);
-      setShowModal(true);
-    }, 1000);
+    console.log('Form submitted:', formData);
+    setShowModal(true);
   };
 
   const handleAddAnother = () => {
     setFormData({
-      idNumber: "",
-      breedType: "",
-      phenotype: "",
-      dateOfBirth: "",
-      gender: "",
-      sirePhenotype: "",
-      dam: "",
-      weight: ""
+      farmId: "",
+      fullName: "",
+      phone: "",
+      dateOfEmployment: "",
+      workingHours: [],
+      paymentRate: ""
     });
     setShowModal(false);
   };
@@ -81,7 +77,7 @@ export default function AddLivestockScreen({ navigation }) {
               tintColor="black"
             />
           </Pressable>
-          <Text style={styles.headerTitle}>Add Livestock Details</Text>
+          <Text style={styles.headerTitle}>Add Employee Details</Text>
           <Pressable onPress={() => console.log("Settings")}>
             <FastImage
               source={icons.settings}
@@ -95,46 +91,40 @@ export default function AddLivestockScreen({ navigation }) {
 
       <RNScrollView style={styles.scrollView}>
         <View style={styles.formContainer}>
-          <Text style={styles.subtitle}>Fill in the livestock details</Text>
+          <Text style={styles.subtitle}>Fill in the employee details</Text>
 
-          {renderFormField("ID Number", formData.idNumber, 
-            (value) => setFormData(prev => ({ ...prev, idNumber: value })))} 
+          {renderFormField("Attached Farm ID", formData.farmId, 
+            (value) => setFormData(prev => ({ ...prev, farmId: value })))}
 
-          {renderFormField("Breed Type", formData.breedType,
-            (value) => setFormData(prev => ({ ...prev, breedType: value })))} 
+          {renderFormField("Full Name", formData.fullName,
+            (value) => setFormData(prev => ({ ...prev, fullName: value })))}
 
-          {renderFormField("Phenotype", formData.phenotype,
-            (value) => setFormData(prev => ({ ...prev, phenotype: value })))} 
+          {renderFormField("Phone Number", formData.phone,
+            (value) => setFormData(prev => ({ ...prev, phone: value })), "phone-pad")}
 
-          {renderFormField("Date of Birth (DD/MM/YYYY)", formData.dateOfBirth,
-            (value) => setFormData(prev => ({ ...prev, dateOfBirth: value })), "default", "DD/MM/YYYY")} 
+          {renderFormField("Date of Employment", formData.dateOfEmployment,
+            (value) => setFormData(prev => ({ ...prev, dateOfEmployment: value })), "default", "DD/MM/YY")}
 
           <View style={styles.formField}>
-            <Text style={styles.label}>Gender</Text>
-            <Radio.Group 
-              name="gender" 
-              value={formData.gender} 
-              onChange={(value) => setFormData(prev => ({ ...prev, gender: value }))}
-            >
-              <HStack space={4}>
-                <Radio value="Male">
-                  <Text>Male</Text>
-                </Radio>
-                <Radio value="Female">
-                  <Text>Female</Text>
-                </Radio>
-              </HStack>
-            </Radio.Group>
+            <Text style={styles.label}>Working Hours</Text>
+            <Text style={styles.subtitle}>Select the type of working hours</Text>
+            <VStack space={2} mt={2}>
+              {workingHourOptions.map((option) => (
+                <Checkbox
+                  key={option}
+                  value={option}
+                  isChecked={formData.workingHours.includes(option)}
+                  onChange={() => handleWorkingHoursChange(option)}
+                  colorScheme="green"
+                >
+                  <Text>{option}</Text>
+                </Checkbox>
+              ))}
+            </VStack>
           </View>
 
-          {renderFormField("Sire Phenotype", formData.sirePhenotype,
-            (value) => setFormData(prev => ({ ...prev, sirePhenotype: value })))} 
-
-          {renderFormField("Dam", formData.dam,
-            (value) => setFormData(prev => ({ ...prev, dam: value })))} 
-
-          {renderFormField("Weight (kg)", formData.weight,
-            (value) => setFormData(prev => ({ ...prev, weight: value }), "numeric"))}
+          {renderFormField("Payment Rates", formData.paymentRate,
+            (value) => setFormData(prev => ({ ...prev, paymentRate: value })), "numeric")}
 
           <HStack space={4} style={styles.buttonContainer}>
             <Button
@@ -150,7 +140,6 @@ export default function AddLivestockScreen({ navigation }) {
             <Button
               flex={1}
               onPress={handleSubmit}
-              isLoading={isLoading}
               style={[styles.button, styles.submitButton]}
             >
               <Text color="white">Submit</Text>
@@ -163,9 +152,9 @@ export default function AddLivestockScreen({ navigation }) {
         <Modal.Content style={styles.modalContent}>
           <Modal.Body>
             <VStack space={6} alignItems="center" style={styles.modalContainer}>
-              <Text style={styles.modalTitle}>Add another livestock</Text>
+              <Text style={styles.modalTitle}>Add another employee</Text>
               <Text style={styles.modalSubtitle}>
-                Feel free to add another livestock; the more, the better
+                Feel free to add another employee, the more the better
               </Text>
               <HStack space={4} width="100%">
                 <Button
