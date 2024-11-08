@@ -18,6 +18,8 @@ import AddEmployeeScreen from "./employee/AddEmployeeScreen";
 import AddFlockDetailsScreen from "./livestock/AddFlockDetails";
 import AddLivestockScreen from "./livestock/AddLivestockDetails";
 import AddLivestockGroupScreen from "./livestock/AddGroupLivestock";
+import OptionDetailsScreen from "./livestock/optionDetails";
+import OptionLivestockGroupScreen from "./livestock/OptionLivestockGroup";
 
 export {
   LoginScreen,
@@ -37,4 +39,6 @@ export {
   AddFlockDetailsScreen,
   AddLivestockScreen,
   AddLivestockGroupScreen,
+  OptionDetailsScreen,
+  OptionLivestockGroupScreen,
 };

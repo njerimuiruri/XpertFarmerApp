@@ -28,6 +28,8 @@ import {
   AddFlockDetailsScreen,
   AddLivestockScreen,
   AddLivestockGroupScreen,
+  OptionDetailsScreen,
+  OptionLivestockGroupScreen,
 } from "./src/screens/index";
 import DrawerNav from "./src/navigation/drawer/DrawerNav1";
 
@@ -174,6 +176,16 @@ export default function App() {
               <Stack.Screen
                 name="AddLivestockGroupScreen"
                 component={AddLivestockGroupScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="OptionDetailsScreen"
+                component={OptionDetailsScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="OptionLivestockGroupScreen"
+                component={OptionLivestockGroupScreen}
                 options={{ headerShown: false }}
               />
             </Stack.Navigator>
