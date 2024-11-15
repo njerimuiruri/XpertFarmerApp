@@ -121,36 +121,6 @@ const Dashboard = () => {
             color="#FF9800"
           />
         </MenuSection>
-        <MenuSection
-          title="Feeding Management Screens"
-          description=" Monitor feeds and manage your feeding schedule"
-        >
-          <MenuButton
-            title="Add Farm Feeds"
-            icon={icons.feeding}
-            onPress={() => navigation.navigate('AddFarmFeedsScreen')}
-            color="#D7CCC8"
-          />
-          <MenuButton
-            title="Add Animal Feeding Program"
-            icon={icons.agriculture}
-            onPress={() => navigation.navigate('AddAnimalFeedingProgramScreen')}
-            color="#D7CCC8"
-          />
-          <MenuButton
-            title="Add Breeding Natural Mating"
-            icon={icons.agriculture}
-            onPress={() => navigation.navigate('AddBreedingNaturalMatingScreen')}
-            color="#D7CCC8"
-          />
-          <MenuButton
-            title="Add Breeding Artificial Mating"
-            icon={icons.agriculture}
-            onPress={() => navigation.navigate('AddBreedingAMScreen')}
-            color="#D7CCC8"
-          />
-        </MenuSection>
-
       </ScrollView>
     </View>
   );
