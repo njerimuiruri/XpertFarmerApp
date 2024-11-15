@@ -80,7 +80,6 @@ export default {
   right_arrow,
   go,
   user,
-  plus,
   password,
   eye,
   eye_close,

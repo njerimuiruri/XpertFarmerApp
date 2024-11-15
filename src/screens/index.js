@@ -18,7 +18,12 @@ import AddEmployeeScreen from "./employee/AddEmployeeScreen";
 import AddFlockDetailsScreen from "./livestock/AddFlockDetails";
 import AddLivestockScreen from "./livestock/AddLivestockDetails";
 import AddLivestockGroupScreen from "./livestock/AddGroupLivestock";
-
+import OptionDetailsScreen from "./livestock/optionDetails";
+import OptionLivestockGroupScreen from "./livestock/OptionLivestockGroup";
+import AddBreedingAMScreen from "./feeds/AddBreedingAMScreen";
+import AddBreedingNaturalMatingScreen from "./feeds/AddBreedingNaturalMatingScreen";
+import AddFarmFeedsScreen from "./feeds/AddFarmFeedsScreen";
+import AddAnimalFeedingProgramScreen from "./feeds/AddAnimalFeedingProgramScreen";
 export {
   LoginScreen,
   SignupScreen,
@@ -37,4 +42,12 @@ export {
   AddFlockDetailsScreen,
   AddLivestockScreen,
   AddLivestockGroupScreen,
+  OptionDetailsScreen,
+  OptionLivestockGroupScreen,
+  AddBreedingAMScreen,
+  AddBreedingNaturalMatingScreen,
+  AddFarmFeedsScreen,
+  AddAnimalFeedingProgramScreen,
+
+
 };

@@ -63,19 +63,6 @@ const FarmRecordsScreen = ({ navigation }) => {
                 source={icons.settings}
                 style={styles.icon}
                 tintColor="white"
-            </TouchableOpacity>
-          </View>
-
-          <Text style={[styles.headerTitle, styles.customFont]}>
-            Farm Records
-          </Text>
-
-          <View style={styles.headerRight}>
-            <TouchableOpacity onPress={() => navigation.navigate('Settings')} style={styles.iconContainer}>
-              <FastImage
-                source={icons.settings}
-                style={styles.icon}
-                tintColor="white"
               />
             </TouchableOpacity>
           </View>

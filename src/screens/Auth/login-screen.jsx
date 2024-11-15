@@ -1,286 +1,108 @@
-import React, { useState } from "react";
-import { View, ScrollView as RNScrollView, StyleSheet } from "react-native";
-import { Text, Input, Button, Select, CheckIcon, Radio, Modal, VStack, HStack, Pressable, Toast } from "native-base";
-import FastImage from 'react-native-fast-image';
-import { icons } from '../../constants';
+import React from "react";
+import { Image } from "react-native";
+import {
+  Box,
+  Text,
+  Input,
+  Button,
+  VStack,
+  Pressable,
+} from "native-base";
 
-export default function AddLivestockScreen({ navigation }) {
-  const [formData, setFormData] = useState({
-    idNumber: "",
-    breedType: "",
-    phenotype: "",
-    dateOfBirth: "",
-    gender: "",
-    sirePhenotype: "",
-    dam: "",
-    weight: ""
-  });
-
-  const [showModal, setShowModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleSubmit = () => {
-    const { idNumber, breedType, phenotype, dateOfBirth, gender, sirePhenotype, dam, weight } = formData;
-    
-    if (!idNumber || !breedType || !phenotype || !dateOfBirth || !gender || !sirePhenotype || !dam || !weight) {
-      Toast.show({
-        title: "Error",
-        status: "error",
-        description: "Please fill in all fields before submitting.",
-      });
-      return;
-    }
-
-    setIsLoading(true);
-    setTimeout(() => {
-      console.log('Form submitted:', formData);
-      setIsLoading(false);
-      setShowModal(true);
-    }, 1000);
-  };
-
-  const handleAddAnother = () => {
-    setFormData({
-      idNumber: "",
-      breedType: "",
-      phenotype: "",
-      dateOfBirth: "",
-      gender: "",
-      sirePhenotype: "",
-      dam: "",
-      weight: ""
-    });
-    setShowModal(false);
-  };
-
-  const renderFormField = (label, value, onChangeText, keyboardType = "default", placeholder = "") => (
-    <View style={styles.formField}>
-      <Text style={styles.label}>{label}</Text>
-      <Input
-        value={value}
-        onChangeText={onChangeText}
-        keyboardType={keyboardType}
-        placeholder={placeholder}
-        style={styles.input}
-        backgroundColor="#e8f5e9"
-        borderWidth={0}
-        fontSize="sm"
-        height={10}
-      />
-    </View>
-  );
-
+export default function LoginScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <HStack justifyContent="space-between" alignItems="center">
-          <Pressable onPress={() => console.log("Menu")}>
-            <FastImage
-              source={icons.menu2} 
-              style={{ width: 20, height: 20 }}
-              tintColor="black"
-            />
+    <Box
+      flex={1}
+      justifyContent="center"
+      alignItems="center"
+      paddingX={6}
+      backgroundColor="white"
+    >
+      <Box position="absolute" top={0} left={0}>
+        <Image
+          source={require("../../assets/images/top-left-decoration.png")}
+          style={{ width: 208, height: 144 }}
+        />
+      </Box>
+
+      <Image
+        source={require("../../assets/images/xpertLogo.jpeg")}
+        style={{ width: 180, height: 180, marginBottom: 20 }} />
+
+      <Text
+        fontSize="20"
+        fontWeight="bold"
+        color="#74c474"
+        mb={5}
+      >
+        Login
+      </Text>
+
+      <VStack width="100%" space={2}>
+        <Box>
+          <Text fontSize="16" fontWeight={500} mb={1} color="black">
+            Phone Number
+          </Text>
+          <Input
+            variant="filled"
+            width="100%"
+            height={10}
+            backgroundColor="#e5f3e5"
+            paddingLeft={2}
+            borderRadius={8}
+            keyboardType="phone-pad"
+          />
+        </Box>
+
+        <Box>
+          <Text fontSize="16" fontWeight={500} mb={1} color="black">
+            Password
+          </Text>
+          <Input
+            variant="filled"
+            width="100%"
+            height={10}
+            backgroundColor="#e5f3e5"
+            paddingLeft={2}
+            borderRadius={8}
+            secureTextEntry
+          />
+
+          <Pressable
+            onPress={() => navigation.navigate("ForgotPasswordScreen")}
+            alignSelf="flex-end"
+            mt={1}
+          >
+            <Text fontSize="13" color="black" className="underline">
+              Forgot Password?
+            </Text>
           </Pressable>
-          <Text style={styles.headerTitle}>Add Livestock Details</Text>
-          <Pressable onPress={() => console.log("Settings")}>
-            <FastImage
-              source={icons.settings}
-              style={{ width: 20, height: 20 }}
-              tintColor="black"
-            />
+        </Box>
+
+        <Button
+          onPress={() => navigation.navigate('DrawerNav')}
+          width="100%"
+          mt={5}
+          backgroundColor="#74c474"
+          padding={3}
+          borderRadius={8}
+        >
+          <Text color="white" fontWeight="bold">
+            LOGIN
+          </Text>
+        </Button>
+
+        <Box mt={5} flexDirection="row" justifyContent="center">
+          <Text fontSize="15" color="black">
+            Do not have an account?{" "}
+          </Text>
+          <Pressable onPress={() => navigation.navigate("SignupScreen")}>
+            <Text fontSize="15" color="#74c474" fontWeight="bold">
+              Register
+            </Text>
           </Pressable>
-        </HStack>
-        <View style={styles.greenLine} />
-      </View>
-
-      <RNScrollView style={styles.scrollView}>
-        <View style={styles.formContainer}>
-          <Text style={styles.subtitle}>Fill in the livestock details</Text>
-
-          {renderFormField("ID Number", formData.idNumber, 
-            (value) => setFormData(prev => ({ ...prev, idNumber: value })))} 
-
-          {renderFormField("Breed Type", formData.breedType,
-            (value) => setFormData(prev => ({ ...prev, breedType: value })))} 
-
-          {renderFormField("Phenotype", formData.phenotype,
-            (value) => setFormData(prev => ({ ...prev, phenotype: value })))} 
-
-          {renderFormField("Date of Birth (DD/MM/YYYY)", formData.dateOfBirth,
-            (value) => setFormData(prev => ({ ...prev, dateOfBirth: value })), "default", "DD/MM/YYYY")} 
-
-          <View style={styles.formField}>
-            <Text style={styles.label}>Gender</Text>
-            <Radio.Group 
-              name="gender" 
-              value={formData.gender} 
-              onChange={(value) => setFormData(prev => ({ ...prev, gender: value }))}
-            >
-              <HStack space={4}>
-                <Radio value="Male">
-                  <Text>Male</Text>
-                </Radio>
-                <Radio value="Female">
-                  <Text>Female</Text>
-                </Radio>
-              </HStack>
-            </Radio.Group>
-          </View>
-
-          {renderFormField("Sire Phenotype", formData.sirePhenotype,
-            (value) => setFormData(prev => ({ ...prev, sirePhenotype: value })))} 
-
-          {renderFormField("Dam", formData.dam,
-            (value) => setFormData(prev => ({ ...prev, dam: value })))} 
-
-          {renderFormField("Weight (kg)", formData.weight,
-            (value) => setFormData(prev => ({ ...prev, weight: value }), "numeric"))}
-
-          <HStack space={4} style={styles.buttonContainer}>
-            <Button
-              flex={1}
-              variant="outline"
-              onPress={() => navigation.goBack()}
-              borderColor="#8bc34a"
-              _text={{ color: "#8bc34a" }}
-              style={styles.button}
-            >
-              <Text color="#8bc34a">Back</Text>
-            </Button>
-            <Button
-              flex={1}
-              onPress={handleSubmit}
-              isLoading={isLoading}
-              style={[styles.button, styles.submitButton]}
-            >
-              <Text color="white">Submit</Text>
-            </Button>
-          </HStack>
-        </View>
-      </RNScrollView>
-
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-        <Modal.Content style={styles.modalContent}>
-          <Modal.Body>
-            <VStack space={6} alignItems="center" style={styles.modalContainer}>
-              <Text style={styles.modalTitle}>Add another livestock</Text>
-              <Text style={styles.modalSubtitle}>
-                Feel free to add another livestock; the more, the better
-              </Text>
-              <HStack space={4} width="100%">
-                <Button
-                  flex={1}
-                  variant="outline"
-                  onPress={() => navigation.goBack()}
-                  style={styles.modalButton}
-                >
-                  <Text color="#666">No</Text>
-                </Button>
-                <Button
-                  flex={1}
-                  onPress={handleAddAnother}
-                  style={[styles.modalButton, styles.modalSubmitButton]}
-                >
-                  <Text color="white">Yes</Text>
-                </Button>
-              </HStack>
-            </VStack>
-          </Modal.Body>
-        </Modal.Content>
-      </Modal>
-    </View>
+        </Box>
+      </VStack>
+    </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#e8f5e9',
-  },
-  headerContainer: {
-    backgroundColor: 'white', 
-    paddingVertical: 40,  
-    paddingHorizontal: 10,
-  },
-  headerTitle: {
-    fontSize: 18,
-    color: '#8bc34a',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    flex: 1,
-  },
-  greenLine: {
-    height: 2,
-    backgroundColor: '#8bc34a',
-    width: '100%',
-    alignSelf: 'center',
-    marginTop: 12,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  formContainer: {
-    backgroundColor: 'white',
-    margin: 16,
-    borderRadius: 12,
-    padding: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  subtitle: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  formField: {
-    marginBottom: 16,
-  },
-  label: {
-    fontSize: 14,
-    color: '#333',
-    marginBottom: 8,
-  },
-  input: {
-    borderRadius: 8,
-  },
-  buttonContainer: {
-    marginTop: 24,
-  },
-  button: {
-    height: 45,
-    borderRadius: 8,
-  },
-  submitButton: {
-    backgroundColor: '#8bc34a',
-    borderWidth: 0,
-  },
-  modalContent: {
-    borderRadius: 16,
-    margin: 20,
-  },
-  modalContainer: {
-    padding: 16,
-  },
-  modalTitle: {
-    fontSize: 18,
-    fontWeight: '500',
-    color: '#333',
-  },
-  modalSubtitle: {
-    fontSize: 14,
-    color: '#666',
-    textAlign: 'center',
-  },
-  modalButton: {
-    height: 45,
-    borderRadius: 8,
-  },
-  modalSubmitButton: {
-    backgroundColor: '#8bc34a',
-    borderWidth: 0,
-  }
-});

@@ -28,6 +28,12 @@ import {
   AddFlockDetailsScreen,
   AddLivestockScreen,
   AddLivestockGroupScreen,
+  OptionDetailsScreen,
+  OptionLivestockGroupScreen,
+  AddBreedingAMScreen,
+  AddBreedingNaturalMatingScreen,
+  AddFarmFeedsScreen,
+  AddAnimalFeedingProgramScreen,
 } from "./src/screens/index";
 import DrawerNav from "./src/navigation/drawer/DrawerNav1";
 
@@ -176,6 +182,38 @@ export default function App() {
                 component={AddLivestockGroupScreen}
                 options={{ headerShown: false }}
               />
+              <Stack.Screen
+                name="OptionDetailsScreen"
+                component={OptionDetailsScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="OptionLivestockGroupScreen"
+                component={OptionLivestockGroupScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="AddBreedingAMScreen"
+                component={AddBreedingAMScreen}
+                options={{ headerShown: false }}
+              />
+               <Stack.Screen
+                name="AddBreedingNaturalMatingScreen"
+                component={AddBreedingNaturalMatingScreen}
+                options={{ headerShown: false }}
+              />
+               <Stack.Screen
+                name="AddFarmFeedsScreen"
+                component={AddFarmFeedsScreen}
+                options={{ headerShown: false }}
+              />
+               <Stack.Screen
+                name="AddAnimalFeedingProgramScreen"
+                component={AddAnimalFeedingProgramScreen}
+                options={{ headerShown: false }}
+              />
+
+  
             </Stack.Navigator>
           </NavigationContainer>
         </ToastProvider>
